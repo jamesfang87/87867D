@@ -31,28 +31,40 @@ void initialize() {
 
 
 void opcontrol() {
+    float front_back = 0, left_right = 0;
+
     // loop forever
     while (true) {
-        // first check buttons
         check_buttons();
-
-        // 
         check_intake();
-
-        // 
         check_arm();
 
+        // Get joystick positions
+        int axis3 = controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);
+        int axis4 = controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_X);
+        int axis1 = controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_Y);
+        int axis2 = controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X);
 
+        // Calculate front-back movement
+        float front_back = (axis3 > 0) ? sqrt(pow(axis3, 2) + pow(axis4, 2)) :
+                           -sqrt(pow(axis3, 2) + pow(axis4, 2));
 
-        // get left y and right x positions
-        int leftY = controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);
-        int rightX = controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X);
+        // Calculate left-right movement
+        float left_right = (axis1 > 0) ? sqrt(pow(axis1, 2) + pow(axis2, 2)) :
+                            -sqrt(pow(axis1, 2) + pow(axis2, 2));
 
-        // move the robot
-        chassis.arcade(leftY, rightX);
+        // Apply corrections based on deadzone
+        float corrected_front_back = (fabs(front_back) < 9 && front_back != 0) ? 9 * front_back : front_back;
+        float corrected_left_right = (fabs(left_right) < 9 && left_right != 0) ? 10 * left_right : left_right;
 
-        // delay to save resources
-        pros::delay(25);
+        // Set motor voltages
+        left_motors.move_voltage((((fabs(corrected_front_back) < 9 && corrected_front_back != 0) ? 9 * corrected_front_back : corrected_front_back) -
+                                      ((fabs(corrected_left_right) < 9 && corrected_left_right != 0) ? 10 * corrected_left_right : corrected_left_right)) * 127);
+
+        right_motors.move_voltage((((fabs(corrected_front_back) < 9 && corrected_front_back != 0) ? 9 * corrected_front_back : corrected_front_back) +
+                                       ((fabs(corrected_left_right) < 9 && corrected_left_right != 0) ? 10 * corrected_left_right : corrected_left_right)) * 127);
+
+        pros::delay(10); // Wait for 10 milliseconds
     }
 }
 
