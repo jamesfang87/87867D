@@ -15,15 +15,15 @@ void output_temps() {
 /**
  * Performs a single check of the buttons.
  * 
- * A: Toggle the state of the clamp
+ * Y: Toggle the state of the clamp
  * B: Output the temperatures of the left mg, right mg, and intake (see output_temps())
- * Y: Toggle the state of the intake lift
+ * A: Toggle the state of the intake lift
  * 
  * @return none
  */
 void check_buttons() {  
     // bind the goal clamp to button 'A'
-    if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_A)) {
+    if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_Y)) {
         clamp.toggle();
     }
 
@@ -33,7 +33,7 @@ void check_buttons() {
     }
 
     // bind intake lift to button 'Y'
-    if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_Y)) {
+    if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_A)) {
         intake_lift.toggle();
     }
 }
