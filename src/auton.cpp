@@ -10,7 +10,6 @@ ASSET(second_ring_txt);
 ASSET(move_back2_txt);
 ASSET(last_ring_txt);
 
-
 void blue_neg() {
     chassis.setPose(59.814, 36.858, 90);
     // lookahead distance: 15 inches
@@ -25,6 +24,8 @@ void blue_neg() {
 }
 
 void red_neg() {
+    chassis.setPose(-58.43, 34.483, -90);
+
     // path, lookahead, time limit, forward, async
 
     // get the first goal
