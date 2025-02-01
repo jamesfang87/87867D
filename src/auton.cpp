@@ -4,6 +4,12 @@ ASSET(move1_txt);
 ASSET(move2_txt);
 
 ASSET(first_goal_txt);
+ASSET(first_ring_txt);
+ASSET(move_back_txt);
+ASSET(second_ring_txt);
+ASSET(move_back2_txt);
+ASSET(last_ring_txt);
+
 
 void blue_neg() {
     chassis.setPose(59.814, 36.858, 90);
