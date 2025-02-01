@@ -18,12 +18,13 @@ void output_temps() {
  * Y: Toggle the state of the clamp
  * B: Output the temperatures of the left mg, right mg, and intake (see output_temps())
  * A: Toggle the state of the intake lift
+ * X: Puts the arm into position to intake a ring into it
  * 
  * @return none
  */
 void check_buttons() {  
-    // bind the goal clamp to button 'A'
-    if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_Y)) {
+    // bind the goal clamp to button 'Y'
+    if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_A)) {
         clamp.toggle();
     }
 
@@ -32,9 +33,15 @@ void check_buttons() {
         output_temps();
     }
 
-    // bind intake lift to button 'Y'
-    if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_A)) {
+    // bind intake lift to button 'A'
+    if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_Y)) {
         intake_lift.toggle();
+        
+    }
+
+    if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_X)) {
+        // TODO: Put this in a thread plus pid
+        arm.move_absolute(217, 1000);
     }
 }
 
@@ -72,7 +79,7 @@ void check_arm() {
     } else if (controller.get_digital(DIGITAL_L2)) {
         arm.move_voltage(-12000);
     } else {
-        arm.move_voltage(0);
+        arm.brake();
     }
 }
 

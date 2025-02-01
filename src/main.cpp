@@ -3,12 +3,14 @@
 
 #include "robot.h"
 #include "driver.h"
+#include "auton.h";
 
 
 // initialize function. Runs on program startup
 void initialize() {
     pros::lcd::initialize(); // initialize brain screen
     chassis.calibrate(); // calibrate sensors
+    arm.set_brake_mode_all(pros::E_MOTOR_BRAKE_HOLD);
     // print position to brain screen
     pros::Task screen_task([&]() {
         while (true) {
@@ -16,6 +18,8 @@ void initialize() {
             pros::lcd::print(0, "X: %f", chassis.getPose().x); // x
             pros::lcd::print(1, "Y: %f", chassis.getPose().y); // y
             pros::lcd::print(2, "Theta: %f", chassis.getPose().theta); // heading
+
+            pros::lcd::print(3, "arm: %f", arm.get_position(0));
             // delay to save resources
             pros::delay(20);
         }
@@ -41,5 +45,7 @@ void opcontrol() {
 }
 
 void autonomous() {
-    
+    blue_neg();
+    //chassis.turnToPoint(10, 0, 4000);
+    //chassis.moveToPoint(0, 48, 4000, {.maxSpeed = 127});
 }

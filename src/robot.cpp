@@ -14,11 +14,11 @@ lemlib::Drivetrain drivetrain(&left_motors, // left motor group
 
 pros::Motor intake(4, pros::MotorGearset::blue);
 
-pros::MotorGroup arm({11, 22}, pros::MotorGearset::green);
+pros::MotorGroup arm({11, -18}, pros::MotorGearset::green);
 
 pros::Imu imu(12);
 pros::Rotation horizontal_encoder(13);
-pros::Rotation vertical_encoder(5);
+pros::Rotation vertical_encoder(-5);
 
 // horizontal tracking wheel
 lemlib::TrackingWheel horizontal_tracking_wheel(&horizontal_encoder, lemlib::Omniwheel::NEW_275, -4.5);
@@ -45,9 +45,9 @@ lemlib::ControllerSettings lateral_controller(4.5, // proportional gain (kP)
 );
 
 // angular PID controller
-lemlib::ControllerSettings angular_controller(1.324, // proportional gain (kP)
+lemlib::ControllerSettings angular_controller(1.5, // proportional gain (kP)
                                             0, // integral gain (kI)
-                                            10, // derivative gain (kD)
+                                            8.5, // derivative gain (kD)
                                             0, // anti windup
                                             0, // small error range, in degrees
                                             0, // small error range timeout, in milliseconds
@@ -64,5 +64,5 @@ lemlib::Chassis chassis(drivetrain, // drivetrain settings
 );
 
 // Pneumatics
-pros::adi::Pneumatics clamp(1, false);
-pros::adi::Pneumatics intake_lift(2, false);
+pros::adi::Pneumatics clamp(2, true);
+pros::adi::Pneumatics intake_lift(1, false);
