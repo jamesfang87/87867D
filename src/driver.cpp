@@ -36,13 +36,37 @@ void check_buttons() {
     // bind intake lift to button 'A'
     if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_Y)) {
         intake_lift.toggle();
-        
     }
 
     if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_X)) {
-        // TODO: Put this in a thread plus pid
-        arm.move_absolute(217, 1000);
+        foo(200.0, 1000);
+        //arm.move_absolute(217, 1000);
     }
+}
+
+void foo(float target, float time_limit) {
+pros::Task task(
+    [=]() {
+        lemlib::PID arm_pid(1, 0, 1, 50, true);
+        printf("called\n");
+        float time = 0;
+
+        float pos = arm.get_position();
+        float error = target - pos;
+
+        printf("arm pos: %f\n", pos);
+        printf("target: %f", target);
+        printf("%f\n", error);
+        while (fabs(error) > 5 && time < time_limit) {
+            printf("%f\n", error);
+            printf("run\n");
+            float output = arm_pid.update(error);
+            arm.move_voltage(50 * output);
+            error = target - arm.get_position();
+            time += 10;
+            pros::delay(10);
+        }
+    });
 }
 
 /**

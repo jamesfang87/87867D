@@ -3,7 +3,7 @@
 
 #include "robot.h"
 #include "driver.h"
-#include "auton.h";
+#include "auton.h"
 
 
 // initialize function. Runs on program startup
@@ -45,7 +45,8 @@ void opcontrol() {
 }
 
 void autonomous() {
-    blue_neg();
+    //blue_neg();
+    red_elim();
     //chassis.turnToPoint(10, 0, 4000);
     //chassis.moveToPoint(0, 48, 4000, {.maxSpeed = 127});
 }

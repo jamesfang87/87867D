@@ -8,4 +8,6 @@ void check_buttons();
 void check_intake();
 void check_arm();
 
+void foo(float target, float time_limit);
+
 #endif

@@ -8,7 +8,7 @@ lemlib::Drivetrain drivetrain(&left_motors, // left motor group
                             &right_motors, // right motor group
                             14, // track width
                             lemlib::Omniwheel::NEW_325, // using new 3.25" omnis
-                            360, // drivetrain rpm is 360
+                            480, // chassis rpm
                             2 // horizontal drift is 2 (for now)
 );
 

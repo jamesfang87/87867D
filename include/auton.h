@@ -8,4 +8,6 @@ void blue_neg();
 void red_pos();
 void red_neg();
 
+void red_elim();
+
 #endif
