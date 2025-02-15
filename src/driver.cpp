@@ -39,16 +39,14 @@ void check_buttons() {
     }
 
     if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_X)) {
-        foo(200.0, 1000);
+        raise_arm(200.0, 1000);
         //arm.move_absolute(217, 1000);
     }
 }
 
-void foo(float target, float time_limit) {
-pros::Task task(
-    [=]() {
+void raise_arm(float target, float time_limit) {
+    pros::Task task([=]() {
         lemlib::PID arm_pid(1, 0, 1, 50, true);
-        printf("called\n");
         float time = 0;
 
         float pos = arm.get_position();

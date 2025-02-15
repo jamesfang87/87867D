@@ -4,6 +4,7 @@
 #include "robot.h"
 #include "driver.h"
 #include "auton.h"
+#include "skills.h"
 
 
 // initialize function. Runs on program startup
@@ -27,6 +28,9 @@ void initialize() {
 }
 
 void opcontrol() {
+    skills();
+
+    
     // loop forever
     while (true) {
         check_buttons();
@@ -45,8 +49,5 @@ void opcontrol() {
 }
 
 void autonomous() {
-    //blue_neg();
-    red_elim();
-    //chassis.turnToPoint(10, 0, 4000);
-    //chassis.moveToPoint(0, 48, 4000, {.maxSpeed = 127});
+    skills();
 }
