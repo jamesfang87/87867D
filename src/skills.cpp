@@ -12,13 +12,12 @@ void skills() {
     arm.set_zero_position_all(0);
 
     // score alliance stake
-
     in.run_intake();
     pros::delay(500);
     in.stop();
-    //intake.move_voltage(0);
 
     // move forward and turn towards goal on left side of the robot (viewed from red side)
+    // inconsistent, flucuates most with battery %
     chassis.moveToPoint(-46, 0, 500, {.minSpeed = 5});
     chassis.turnToHeading(180, 500);
     chassis.moveToPoint(-50, 24, 1000, {.forwards = false, .maxSpeed = 60}, false);
@@ -26,17 +25,13 @@ void skills() {
     clamp.toggle();
     pros::delay(50);
 
-    // get ring at (-24, 24)
+    // get ring at (-24, 24) and (24, 48)
     
     //pros::delay(1000);
     in.run_intake();
     chassis.turnToHeading(90, 500, {}, false);
-    
-    //intake.move_velocity(12000);
-    //chassis.moveToPoint(-16, 24, 1000, {.minSpeed = 10}, false);
-    
-    //pros::delay(1000);
-
-    // get ring at (24, 47)
+    // also fluctates with battery %
+    // tune maximum speed
+    // also raise speed at the end so that it can actually intake the last ring
     chassis.follow(one_txt, 10, 4000, true, false);
 }
