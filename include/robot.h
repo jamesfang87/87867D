@@ -50,4 +50,11 @@ extern lemlib::Chassis chassis;
 extern pros::adi::Pneumatics clamp;
 extern pros::adi::Pneumatics intake_lift;
 
+class Intake {
+public:
+    void run_intake();
+    void run_outtake();
+    void stop();
+};
+
 #endif

@@ -66,3 +66,21 @@ lemlib::Chassis chassis(drivetrain, // drivetrain settings
 // Pneumatics
 pros::adi::Pneumatics clamp(2, true);
 pros::adi::Pneumatics intake_lift(1, false);
+
+void Intake::run_intake() {
+    pros::Task task([=]() {
+        intake.move_voltage(12000);
+    });
+}
+
+void Intake::run_outtake() {
+    pros::Task task([=]() {
+        intake.move_voltage(-6000);
+    });
+}
+
+void Intake::stop() {
+    pros::Task task([=]() {
+        intake.brake();
+    });
+}
