@@ -1,9 +1,12 @@
 #include "skills.h"
 
 ASSET(one_txt);
+ASSET(two_txt);
 
-void skills() {
-    Intake in = Intake();
+Intake in = Intake(); // don't worry abt it
+// use with in.run_intake() for intake
+
+void high_stake1() {
     // place to robot where back of the robot is right against
     // the black plastic holder for the alliance stake.
     // this distance (from the wall to the metal bar at the back of the robot) is 1.5 inches
@@ -18,9 +21,9 @@ void skills() {
 
     // move forward and turn towards goal on left side of the robot (viewed from red side)
     // inconsistent, flucuates most with battery %
-    chassis.moveToPoint(-46, 0, 500, {.minSpeed = 5});
+    chassis.moveToPoint(-44, 0, 500);
     chassis.turnToHeading(180, 500);
-    chassis.moveToPoint(-50, 24, 1000, {.forwards = false, .maxSpeed = 60}, false);
+    chassis.moveToPoint(-49, 24, 1000, {.forwards = false, .maxSpeed = 60, .minSpeed = 10}, false);
     pros::delay(100);
     clamp.toggle();
     pros::delay(50);
@@ -33,5 +36,47 @@ void skills() {
     // also fluctates with battery %
     // tune maximum speed
     // also raise speed at the end so that it can actually intake the last ring
-    chassis.follow(one_txt, 10, 4000, true, false);
+    chassis.follow(one_txt, 14, 6000, true, false);
+    pros::delay(100);
+
+    chassis.moveToPoint(0, 37, 2000, {.forwards = false, .maxSpeed = 60}, false);
+    chassis.turnToHeading(0, 1500);
+
+    clamp.toggle();  // remove after testing
+}
+
+/**
+ * Ran after scoring on the left wall stake (viewed from starting side)
+ */
+void corner1() {
+    clamp.toggle();
+    pros::delay(200);
+
+    chassis.setPose(0, 47, 0); // remove after testing
+
+    // turn to face rings
+    chassis.turnToHeading(270, 1000);
+    in.run_intake();
+    chassis.moveToPoint(-63.5, 48, 1500, {.maxSpeed = 60, .minSpeed = 10}, false);
+    pros::delay(200);
+    chassis.moveToPoint(-56, 48, 500, {.forwards = false, .maxSpeed = 60}, false);
+    chassis.follow(two_txt, 10, 2500, true, false);
+
+    // put goal into corner
+
+    chassis.moveToPoint(-64.32, 65.6, 1000, {.forwards = false}, false);
+    clamp.toggle();
+    chassis.moveToPoint(47, 47, 1000, {}, false);
+    chassis.turnToHeading(180, 1000, {}, false);
+
+    // does not move to bottom corner
+}
+
+void corner2() {
+
+}
+
+
+void skills() {
+    corner1();
 }

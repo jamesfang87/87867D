@@ -21,9 +21,9 @@ pros::Rotation horizontal_encoder(13);
 pros::Rotation vertical_encoder(-5);
 
 // horizontal tracking wheel
-lemlib::TrackingWheel horizontal_tracking_wheel(&horizontal_encoder, lemlib::Omniwheel::NEW_275, -4.5);
+lemlib::TrackingWheel horizontal_tracking_wheel(&horizontal_encoder, lemlib::Omniwheel::NEW_275, -4.75);
 // vertical tracking wheel
-lemlib::TrackingWheel vertical_tracking_wheel(&vertical_encoder, lemlib::Omniwheel::NEW_275, -2);
+lemlib::TrackingWheel vertical_tracking_wheel(&vertical_encoder, lemlib::Omniwheel::NEW_275, -1.625);
 
 lemlib::OdomSensors sensors(&vertical_tracking_wheel, // vertical tracking wheel 1, set to null
                         nullptr, // vertical tracking wheel 2, set to nullptr as we are using IMEs
