@@ -41,10 +41,10 @@ void high_stake1() {
     chassis.follow(one_txt, 14, 6000, true, false);
     pros::delay(100);
 
-    chassis.moveToPoint(0, 37, 2000, {.forwards = false, .maxSpeed = 60}, false);
+    chassis.moveToPoint(0, 47, 2000, {.forwards = false, .maxSpeed = 60}, false);
     chassis.turnToHeading(0, 1500);
 
-    clamp.toggle();  // remove after testing
+    //clamp.toggle();  // remove after testing
 }
 
 /**
@@ -59,7 +59,7 @@ void corner1() {
     // turn to face rings
     chassis.turnToHeading(270, 1000);
     in.run_intake();
-    chassis.moveToPoint(-63.5, 48, 1500, {.maxSpeed = 60, .minSpeed = 10}, false);
+    chassis.moveToPoint(-64, 48, 2000, {.maxSpeed = 60, .minSpeed = 10}, false);
     pros::delay(200);
     chassis.moveToPoint(-56, 48, 500, {.forwards = false, .maxSpeed = 60}, false);
     chassis.follow(two_txt, 10, 2500, true, false);
@@ -68,7 +68,7 @@ void corner1() {
 
     chassis.moveToPoint(-64.32, 65.6, 1000, {.forwards = false}, false);
     clamp.toggle();
-    chassis.moveToPoint(47, 47, 1000, {}, false);
+    chassis.moveToPoint(-47, 47, 1000, {}, false);
     chassis.turnToHeading(180, 1000, {}, false);
 
     // does not move to bottom corner
@@ -88,7 +88,27 @@ void corner2() {
     clamp.toggle();
 }
 
+void third_goal() {
+    chassis.moveToPoint(60, 21, 3000, {.forwards = false}, false);
+    pros::delay(100);
+    clamp.toggle();
+    pros::delay(50);
+
+    chassis.moveToPoint(63.105, -65, 2000, {.forwards = false}, false);
+    
+}
+
 
 void skills() {
+    high_stake1();
+
+    // TODO: fill in arm code once done
+
     corner1();
+    //corner2();
+
+
+    
+
+    //corner1();
 }
