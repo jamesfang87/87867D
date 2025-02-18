@@ -2,10 +2,12 @@
 
 ASSET(one_txt);
 ASSET(two_txt);
+ASSET(three_txt);
 
 Intake in = Intake(); // don't worry abt it
 // use with in.run_intake() for intake
 
+// TODO: retest
 void high_stake1() {
     // place to robot where back of the robot is right against
     // the black plastic holder for the alliance stake.
@@ -50,9 +52,9 @@ void high_stake1() {
  */
 void corner1() {
     clamp.toggle();
-    pros::delay(200);
+    pros::delay(200); // remove after testing
 
-    chassis.setPose(0, 47, 0); // remove after testing
+    chassis.setPose(0, 47, 0); // remove after testing, maybe not who knows
 
     // turn to face rings
     chassis.turnToHeading(270, 1000);
@@ -73,7 +75,17 @@ void corner1() {
 }
 
 void corner2() {
+    // clamp is open at this point
+    chassis.moveToPoint(-47, -25, 4000, {.forwards = false, .maxSpeed = 100}, false);
+    clamp.toggle();
+    pros::delay(100);
 
+    chassis.turnToHeading(29, 1000);
+    in.run_intake();
+    chassis.follow(three_txt, 12, 4000, true, false);
+
+    chassis.moveToPoint(-56, -63, 2000, {.forwards = false}, false);
+    clamp.toggle();
 }
 
 
