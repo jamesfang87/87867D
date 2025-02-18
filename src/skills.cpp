@@ -94,8 +94,9 @@ void third_goal() {
     clamp.toggle();
     pros::delay(50);
 
-    chassis.moveToPoint(63.105, -65, 2000, {.forwards = false}, false);
-    
+
+    chassis.moveToPoint(58.84, -44.5, 2000, {.maxSpeed = 60}, false);
+
 }
 
 
