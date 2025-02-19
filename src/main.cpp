@@ -20,7 +20,7 @@ void initialize() {
             pros::lcd::print(1, "Y: %f", chassis.getPose().y); // y
             pros::lcd::print(2, "Theta: %f", chassis.getPose().theta); // heading
 
-            pros::lcd::print(3, "arm: %f", arm.get_position(0));
+            pros::lcd::print(3, "imu: %f", imu.get_heading());
             // delay to save resources
             pros::delay(20);
         }
@@ -28,6 +28,7 @@ void initialize() {
 }
 
 void opcontrol() {
+    imu.set_heading(90);
     skills();
 
     

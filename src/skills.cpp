@@ -101,8 +101,8 @@ void third_goal() {
 
 void skills() {
     high_stake1();
-    corner1();
-    corner2();
+    //corner1();
+    //corner2();
 
     // TODO: fill in arm code once done
 
