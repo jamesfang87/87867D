@@ -3,11 +3,13 @@
 ASSET(one_txt);
 ASSET(two_txt);
 ASSET(three_txt);
+ASSET(four_txt);
+ASSET(five_txt);
 
 Intake in = Intake(); // don't worry abt it
 // use with in.run_intake() for intake
 
-// TODO: retest
+// probably good
 void high_stake1() {
     // place to robot where back of the robot is right against
     // the black plastic holder for the alliance stake.
@@ -31,60 +33,57 @@ void high_stake1() {
     pros::delay(50);
 
     // get ring at (-24, 24) and (24, 48)
-    
-    //pros::delay(1000);
     in.run_intake();
     chassis.turnToHeading(90, 500, {}, false);
-    // also fluctates with battery %
-    // tune maximum speed
-    // also raise speed at the end so that it can actually intake the last ring
     chassis.follow(one_txt, 14, 6000, true, false);
     pros::delay(100);
 
-    chassis.moveToPoint(0, 47, 2000, {.forwards = false, .maxSpeed = 60}, false);
-    chassis.turnToHeading(0, 1500);
-
-    //clamp.toggle();  // remove after testing
+    // it gets off, that's why i set to 3 here
+    chassis.moveToPoint(3, 47, 2000, {.forwards = false, .maxSpeed = 60}, false);
+    chassis.turnToHeading(0, 1500, {}, false);
+    pros::delay(200);
 }
 
 /**
  * Ran after scoring on the left wall stake (viewed from starting side)
  */
 void corner1() {
-    clamp.toggle();
-    pros::delay(200); // remove after testing
-
-    chassis.setPose(0, 47, 0); // remove after testing, maybe not who knows
+    chassis.setPose(0, 47, 0); // do not remove
 
     // turn to face rings
-    chassis.turnToHeading(270, 1000);
     in.run_intake();
+    chassis.turnToHeading(270, 1000, {}, false);
     chassis.moveToPoint(-64, 48, 2000, {.maxSpeed = 60, .minSpeed = 10}, false);
     pros::delay(200);
     chassis.moveToPoint(-56, 48, 500, {.forwards = false, .maxSpeed = 60}, false);
     chassis.follow(two_txt, 10, 2500, true, false);
 
     // put goal into corner
-
     chassis.moveToPoint(-64.32, 65.6, 1000, {.forwards = false}, false);
     clamp.toggle();
     chassis.moveToPoint(-47, 47, 1000, {}, false);
-    chassis.turnToHeading(180, 1000, {}, false);
+    chassis.turnToHeading(180, 1000, {}, false); // TODO: invert this angle
 
-    // does not move to bottom corner
+    // note: this does not move to bottom corner
 }
 
 void corner2() {
     // clamp is open at this point
-    chassis.moveToPoint(-47, -25, 4000, {.forwards = false, .maxSpeed = 100}, false);
+    chassis.moveToPoint(-47, -25, 3000, {.forwards = false, .maxSpeed = 100}, false);
     clamp.toggle();
     pros::delay(100);
 
-    chassis.turnToHeading(29, 1000);
     in.run_intake();
-    chassis.follow(three_txt, 12, 4000, true, false);
+    chassis.follow(four_txt, 12, 3000, true, false);
 
-    chassis.moveToPoint(-56, -63, 2000, {.forwards = false}, false);
+    chassis.moveToPoint(-64, -47, 2000, {.maxSpeed = 60, .minSpeed = 10}, false);
+    pros::delay(200);
+
+    chassis.moveToPoint(-56, -48, 500, {.forwards = false, .maxSpeed = 60}, false);
+    chassis.follow(five_txt, 10, 2500, true, false);
+
+    // put goal in corner
+    chassis.moveToPoint(-64.32, -65.6, 1000, {.forwards = false}, false);
     clamp.toggle();
 }
 
@@ -102,10 +101,12 @@ void third_goal() {
 
 void skills() {
     high_stake1();
+    corner1();
+    corner2();
 
     // TODO: fill in arm code once done
 
-    corner1();
+    //corner1();
     //corner2();
 
 
