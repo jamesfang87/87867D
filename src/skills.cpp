@@ -6,9 +6,6 @@ ASSET(three_txt);
 ASSET(four_txt);
 ASSET(five_txt);
 
-Intake in = Intake(); // don't worry abt it
-// use with in.run_intake() for intake
-
 // probably good
 void high_stake1() {
     // place to robot where back of the robot is right against
@@ -19,9 +16,9 @@ void high_stake1() {
     arm.set_zero_position_all(0);
 
     // score alliance stake
-    in.run_intake();
+    intake.move_voltage(12000);
     pros::delay(500);
-    in.stop();
+    intake.brake();
 
     // move forward and turn towards goal on left side of the robot (viewed from red side)
     // inconsistent, flucuates most with battery %
@@ -33,7 +30,7 @@ void high_stake1() {
     pros::delay(50);
 
     // get ring at (-24, 24) and (24, 48)
-    in.run_intake();
+    intake.move_voltage(12000);
     chassis.turnToHeading(90, 500, {}, false);
     chassis.follow(one_txt, 14, 6000, true, false);
     pros::delay(100);
@@ -51,7 +48,7 @@ void corner1() {
     chassis.setPose(0, 47, 0); // do not remove
 
     // turn to face rings
-    in.run_intake();
+    intake.move_voltage(12000);
     chassis.turnToHeading(270, 1000, {}, false);
     chassis.moveToPoint(-64, 48, 2000, {.maxSpeed = 60, .minSpeed = 10}, false);
     pros::delay(200);
@@ -73,7 +70,7 @@ void corner2() {
     clamp.toggle();
     pros::delay(100);
 
-    in.run_intake();
+    intake.move_voltage(12000);
     chassis.follow(four_txt, 12, 3000, true, false);
 
     chassis.moveToPoint(-64, -47, 2000, {.maxSpeed = 60, .minSpeed = 10}, false);
@@ -95,8 +92,6 @@ void third_goal() {
     pros::delay(100);
     clamp.toggle();
     pros::delay(50);
-
-    
 
     chassis.moveToPoint(58.84, -44.5, 2000, {.maxSpeed = 60}, false);
 }

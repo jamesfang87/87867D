@@ -30,7 +30,6 @@ void initialize() {
 void opcontrol() {
     imu.set_heading(90);
     skills();
-
     
     // loop forever
     while (true) {

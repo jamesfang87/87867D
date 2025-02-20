@@ -1,19 +1,6 @@
 #include "main.h"
 #include "lemlib/api.hpp" // IWYU pragma: keep
 
-/*
-class Robot {
-private:
-    pros::MotorGroup left_mg, right_mg;
-    pros::Imu imu;
-    pros::Rotation horizontal_encoder, vertical_encoder;
-
-public:
-    Robot();
-};
-
-*/
-
 #ifndef ROBOT_H
 #define ROBOT_H
 extern pros::Controller controller;
@@ -49,12 +36,5 @@ extern lemlib::Chassis chassis;
 // Pneumatics
 extern pros::adi::Pneumatics clamp;
 extern pros::adi::Pneumatics intake_lift;
-
-class Intake {
-public:
-    void run_intake();
-    void run_outtake();
-    void stop();
-};
 
 #endif
