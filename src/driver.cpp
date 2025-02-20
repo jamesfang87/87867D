@@ -104,38 +104,3 @@ void check_arm() {
         arm.brake();
     }
 }
-
-/*
-float front_back = 0;
-float left_right = 0;
-
-
-void usercontrol()
-{
-    arm.setStopping(vex::hold);
-    while (1)
-    {
-
-        
-        front_back = (Controller.Axis3.position() > 0) ? sqrt((pow(Controller.Axis3.position(), 2) + pow(Controller.Axis4.position(), 2))) :
-        -sqrt((pow(Controller.Axis3.position(), 2) + pow(Controller.Axis4.position(), 2)));
-        // Calculate the front-back movement using joystick axes (Axis3 and Axis4 for a combination of movement)
-        // Uses distance from 0, 0 through Pythagoreas theorem and enables movement based on semicircle
-
-        left_right = (Controller.Axis1.position() > 0) ? sqrt((pow(Controller.Axis1.position(), 2) + pow(Controller.Axis2.position(), 2))) :
-        -sqrt((pow(Controller.Axis1.position(), 2) + pow(Controller.Axis2.position(), 2)));
-        // Calculate the front-back movement using joystick axes (Axis1 and Axis2 for a combination of movement)
-        // Uses distance from 0, 0 through Pythagoreas theorem and enables movement based on semicircle
-
-        left_drivetrain.spin(vex::forward, (((fabs(front_back) < 9 && front_back != 0) ? 9 * front_back : front_back) -
-        ((fabs(left_right) < 9 && left_right != 0) ? 10 * left_right : left_right)) * 127/1000, vex::volt);
-
-        right_drivetrain.spin(vex::forward, (((fabs(front_back) < 9 && front_back != 0) ? 9 * front_back : front_back) + 
-        ((fabs(left_right) < 9 && left_right != 0) ? 10 * left_right : left_right)) * 127/1000, vex::volt);
-        // If the absolute value of front_back is less than 9 (deadzone) and not zero, set front_back to 9 for friction
-        // Apply a correction to left_right in similar fashion for small values.
-
-        wait(10, vex::msec);
-    }
-}
-*/

@@ -88,14 +88,17 @@ void corner2() {
 }
 
 void third_goal() {
-    chassis.moveToPoint(60, 21, 3000, {.forwards = false}, false);
+    chassis.setPose(0, -48, 180);
+
+
+    chassis.moveToPoint(60, -24, 3000, {.forwards = false}, false);
     pros::delay(100);
     clamp.toggle();
     pros::delay(50);
 
+    
 
     chassis.moveToPoint(58.84, -44.5, 2000, {.maxSpeed = 60}, false);
-
 }
 
 
