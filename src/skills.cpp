@@ -27,6 +27,7 @@ void high_stake1() {
     chassis.turnToHeading(180, 500);
     chassis.moveToPoint(-49, 24, 1000, {.forwards = false, .maxSpeed = 60, .minSpeed = 10}, false);
     
+    // clamp goal
     pros::delay(100);
     clamp.toggle();
     pros::delay(50);
@@ -37,16 +38,10 @@ void high_stake1() {
     // TODO: test this after imu is moved
     chassis.follow(one_txt, 11, 3500, true, false);
     pros::delay(75);
-    //imu.set_heading(0);
-    //chassis.setPose(0, 64, 0);
-
-    //intake.brake();
 
     // TODO: test this after imu is moved
     chassis.moveToPoint(0, 49.6, 1200, {.forwards = false, .maxSpeed = 60}, false);
     chassis.turnToHeading(-90, 750, {.maxSpeed = 80}, false);
-
-    //clamp.toggle();
 }
 
 /**
@@ -64,10 +59,11 @@ void corner1() {
     chassis.moveToPoint(-44, 61, 2000, {.maxSpeed = 60}, false);
     pros::delay(400);  // wait to intake ring
 
-    // // put goal into corner
+    // put goal into corner
     chassis.moveToPoint(-61, 61, 2000, {.forwards = false, .maxSpeed = 70}, false);
     clamp.toggle();
-    // // !intake.move_voltage(-12000);
+    intake.brake();
+
     pros::delay(100);
     chassis.setPose(chassis.getPose().x, chassis.getPose().y, 140);
     
@@ -78,28 +74,32 @@ void corner1() {
 }
 
 void corner2() {
-    //chassis.setPose(-47, 47, 0); // TODO: test theta that we set to
+    chassis.setPose(-47, 47, 0); // TODO: test theta that we set to
 
     // get mobile goal; note: clamp is open at this point
-    //chassis.moveToPoint(-47, -25, 2000, {.forwards = false, .maxSpeed = 100, .earlyExitRange = 35}, false);
-    //clamp.toggle();
-    //pros::delay(100);
+    chassis.moveToPoint(-47, -25, 2000, {.forwards = false, .maxSpeed = 100, .earlyExitRange = 35}, false);
+    clamp.toggle();
+    pros::delay(100);
 
-    // // intake 2 rings, moving into position to intake the rest
-    // // !intake.move_voltage(12000);
-    // chassis.follow(two_txt, 12, 3000, true, false);
+    // intake 2 rings, moving into position to intake the rest
+    intake.move_voltage(12000);
+    chassis.follow(two_txt, 12, 3000, true, false);
 
-    // chassis.moveToPoint(0, -47, 2000, {.forwards = false, .maxSpeed = 60}, false);
+    chassis.moveToPoint(0, -49.5, 2000, {.forwards = false, .maxSpeed = 60}, false);
 
-    // // intake 3 collinear rings
-    // chassis.moveToPoint(-59, -47, 2000, {.maxSpeed = 60, .minSpeed = 10}, false);
-    // pros::delay(200);
-    // chassis.moveToPoint(-47, -56, 1500, {.maxSpeed = 60}, false);
-    // pros::delay(200);
+    // intake 3 collinear rings
+    chassis.moveToPoint(-59, -48, 2000, {.maxSpeed = 60, .minSpeed = 10}, false);
+    pros::delay(600);
+    chassis.moveToPoint(-44, -61, 1500, {.maxSpeed = 60}, false);
+    pros::delay(400);
 
-    // // put goal in corner
-    // chassis.moveToPoint(-61, -61, 1000, {.forwards = false}, false);
-    // clamp.toggle();
+    // put goal in corner
+    chassis.moveToPoint(-61, -61, 1000, {.forwards = false}, false);
+    clamp.toggle();
+    intake.brake();
+
+    pros::delay(100);
+    chassis.setPose(chassis.getPose().x, chassis.getPose().y, 140);
 }
 
 void third_goal() {
@@ -131,6 +131,6 @@ void third_goal() {
 void skills() {
     high_stake1();
     corner1();
-    //corner2();
+    corner2();
 
 }
