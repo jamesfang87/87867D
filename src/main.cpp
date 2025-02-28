@@ -1,4 +1,5 @@
 #include "main.h"
+#include <cstdio>
 #include "lemlib/api.hpp" // IWYU pragma: keep
 
 #include "robot.h"
@@ -21,6 +22,10 @@ void initialize() {
             pros::lcd::print(2, "Theta: %f", chassis.getPose().theta); // heading
 
             pros::lcd::print(3, "imu: %f", imu.get_heading());
+
+            printf("X: %f\n", chassis.getPose().x);
+            printf("Y: %f\n", chassis.getPose().y);
+            printf("Theta: %f\n", chassis.getPose().theta);
             // delay to save resources
             pros::delay(20);
         }
