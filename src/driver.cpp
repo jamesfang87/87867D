@@ -39,7 +39,7 @@ void check_buttons() {
     }
 
     if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_X)) {
-        move_arm_to(200.0, 1000);
+        move_arm_to(250, 1000);
     }
 }
 
@@ -54,9 +54,9 @@ void check_buttons() {
  */
 void check_intake() {
     if (controller.get_digital(DIGITAL_R1)) {
-        intake.move_voltage(11000);
+        intake.move_voltage(9000);
     } else if (controller.get_digital(DIGITAL_R2)) {
-        intake.move_voltage(-12000);
+        intake.move_voltage(-9000);
     } else {
         intake.move_voltage(0);
     }

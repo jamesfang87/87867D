@@ -1,5 +1,6 @@
 #include "main.h"
 #include "lemlib/api.hpp" // IWYU pragma: keep
+#include "pros/rotation.hpp"
 
 #ifndef ROBOT_H
 #define ROBOT_H
@@ -12,6 +13,7 @@ extern lemlib::Drivetrain drivetrain;
 extern pros::Motor intake;
 
 extern pros::MotorGroup arm;
+extern pros::Rotation arm_encoder;
 
 extern pros::Imu imu;
 extern pros::Rotation horizontal_encoder;

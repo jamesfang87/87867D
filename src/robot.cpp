@@ -1,4 +1,5 @@
 #include "robot.h"
+#include "pros/rotation.hpp"
 
 pros::Controller controller(pros::E_CONTROLLER_MASTER);
 
@@ -15,7 +16,7 @@ lemlib::Drivetrain drivetrain(&left_motors, // left motor group
 pros::Motor intake(4, pros::MotorGearset::blue);
 
 pros::MotorGroup arm({11, -18}, pros::MotorGearset::green);
-
+pros::Rotation arm_encoder(19);
 
 pros::Imu imu(20);
 

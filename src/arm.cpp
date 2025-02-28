@@ -5,7 +5,7 @@ void move_arm_to(float target, float time_limit = 2000) {
         lemlib::PID arm_pid(1, 0, 1, 50, true);
         float time = 0;
 
-        float pos = arm.get_position();
+        float pos = arm_encoder.get_angle();
         float error = target - pos;
 
         printf("arm pos: %f\n", pos);

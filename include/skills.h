@@ -5,4 +5,6 @@
 #define SKILLS_H
 void skills();
 
+void arm_test();
+
 #endif

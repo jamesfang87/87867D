@@ -77,7 +77,7 @@ void corner1() {
  */
 void corner2() {
     // get mobile goal; note: clamp is open at this point
-    chassis.moveToPoint(-47, -25, 1500, {.forwards = false, .maxSpeed = 60}, false);
+    chassis.moveToPoint(-47, -25, 1500, {.forwards = false, .maxSpeed = 55}, false);
     clamp.toggle();
     pros::delay(100);
 
@@ -88,8 +88,8 @@ void corner2() {
     chassis.moveToPoint(0, -47, 1000, {.forwards = false, .maxSpeed = 70}, false);
     chassis.turnToHeading(266.5, 800, {.maxSpeed = 80}, false);
 
-    chassis.setPose(chassis.getPose().x, -48, -90); // !do not remove
-    imu.set_heading(270);
+    // chassis.setPose(chassis.getPose().x, -48, -90); // !do not remove
+    // imu.set_heading(270);
 
     // // intake the 3 collinear rings
     //intake.move_voltage(12000);
@@ -137,4 +137,13 @@ void corner2() {
 void skills() {
     corner1();
     corner2();
+}
+
+void arm_test() {
+    chassis.setPose(0, -48, 180);
+    move_arm_to(250, 1000);
+    intake.move_voltage(10000);
+    chassis.moveToPoint(0, -65, 2000, {.maxSpeed = 70}, false);
+    move_arm_to(2000, 2000);
+
 }
