@@ -4,10 +4,6 @@
 
 ASSET(one_txt);
 ASSET(two_txt);
-ASSET(three_txt);
-ASSET(four_txt);
-ASSET(five_txt);
-ASSET(six_txt);
 
 /**
  * @brief The start of the skills run. This scores the entire first corner.
@@ -66,7 +62,6 @@ void corner1() {
     // TODO: test this part so we can link up with corner2()
     chassis.moveToPoint(-47, 47, 1000 ,{.maxSpeed = 90}, false);
     chassis.turnToHeading(0, 1500, {.maxSpeed = 90, .minSpeed = 20}, false);
-    printf("what : %f", chassis.getPose().x);
 
     chassis.moveToPoint(-47, 0, 1500, {.forwards = false, .minSpeed = 60, .earlyExitRange = 5,}, false);
     
@@ -76,7 +71,13 @@ void corner1() {
  * @brief Scores the second corner.
  */
 void corner2() {
-    // get mobile goal; note: clamp is open at this point
+
+}
+
+void skills() {
+    corner1();
+    
+        // get mobile goal; note: clamp is open at this point
     chassis.moveToPoint(-47, -25, 1500, {.forwards = false, .maxSpeed = 55}, false);
     clamp.toggle();
     pros::delay(100);
@@ -87,9 +88,6 @@ void corner2() {
 
     chassis.moveToPoint(0, -47, 1000, {.forwards = false, .maxSpeed = 70}, false);
     chassis.turnToHeading(266.5, 800, {.maxSpeed = 80}, false);
-
-    // chassis.setPose(chassis.getPose().x, -48, -90); // !do not remove
-    // imu.set_heading(270);
 
     // // intake the 3 collinear rings
     //intake.move_voltage(12000);
@@ -104,23 +102,27 @@ void corner2() {
     chassis.moveToPoint(-57, -65, 1200, {.forwards = false, .maxSpeed = 60}, false);
     clamp.toggle();
     intake.brake();
-
     pros::delay(200);
-
+    
     chassis.turnToPoint(60, -24, 700, {.forwards = true, .maxSpeed = 80}, false);
     chassis.moveToPoint(34, -33, 2000, {.forwards = true, .maxSpeed = 90}, false);
     chassis.moveToPoint(63, -21, 2000, {.forwards = false, .maxSpeed = 60}, false);
     clamp.toggle();
     pros::delay(200);
 
+    // put goal in corner
     chassis.moveToPoint(66, -59, 1500, {.forwards = false, .maxSpeed = 80}, false);
     clamp.toggle();
 
+    // get into a more favorable position to clamp onto the middle mobile goal
     chassis.moveToPoint(48, -24, 1500, {.maxSpeed = 70}, false);
-    chassis.moveToPoint(48, 0, 1700, {.forwards = false, .maxSpeed = 50}, false);
+    // get the middle mogo and clamp
+    chassis.moveToPoint(48, 0, 1700, {.forwards = false, .maxSpeed = 60}, false);
     clamp.toggle();
     pros::delay(200);
 
+
+    // get the 6 rings left on the opposite side
     intake.move_voltage(10000);
     chassis.moveToPoint(24, -24, 1500, {.maxSpeed = 70}, false);
     chassis.moveToPoint(0, 0, 1500, {.maxSpeed = 70}, false);
@@ -130,13 +132,6 @@ void corner2() {
     chassis.moveToPoint(48, 60, 1500, {.maxSpeed = 70} ,false);
     chassis.moveToPoint(67, 65, 1500, {.forwards = false, .maxSpeed = 90}, false);
     clamp.toggle();
-    // imu.set_heading(imu.get_heading() + 1.8);
-    // chassis.setPose(chassis.getPose().x, chassis.getPose().y, imu.get_heading());
-}
-
-void skills() {
-    corner1();
-    corner2();
 }
 
 void arm_test() {

@@ -54,9 +54,9 @@ void check_buttons() {
  */
 void check_intake() {
     if (controller.get_digital(DIGITAL_R1)) {
-        intake.move_voltage(9000);
+        intake.move_voltage(9100);
     } else if (controller.get_digital(DIGITAL_R2)) {
-        intake.move_voltage(-9000);
+        intake.move_voltage(-9100);
     } else {
         intake.move_voltage(0);
     }
