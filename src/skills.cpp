@@ -13,16 +13,26 @@ ASSET(two_txt);
  * The preload should be about in the middle
  */
 void corner1() {
+    
+
+}
+/**
+ * @brief Scores the second corner.
+ */
+void corner2() {
+
+}
+
+void skills() {
     chassis.setPose(-63, 0, 90);
     arm.set_zero_position_all(0);
 
     // score alliance stake
-    intake.move_voltage(10000);
+    intake.move_voltage(8000);
     pros::delay(500);
     intake.brake();
 
     // move forward and turn towards goal on left side of the robot (viewed from red side)
-    // inconsistent, fluctuates most with battery %
     chassis.moveToPoint(-48, 0, 700);
     chassis.turnToHeading(180, 700);
     chassis.moveToPoint(-48, 24, 1000, {.forwards = false, .maxSpeed = 70, .minSpeed = 10}, false);
@@ -33,7 +43,7 @@ void corner1() {
     pros::delay(100);
 
     // get ring at (-24, 24) and (24, 48)
-    intake.move_voltage(10000);
+    intake.move_voltage(8000);
     chassis.turnToHeading(90, 700, {}, false);
     chassis.follow(one_txt, 11, 4000, true, false);
     pros::delay(75);
@@ -58,39 +68,24 @@ void corner1() {
     intake.brake();
     pros::delay(100);
 
-    // moves to y = 0
-    // TODO: test this part so we can link up with corner2()
+    
     chassis.moveToPoint(-47, 47, 1000 ,{.maxSpeed = 90}, false);
     chassis.turnToHeading(0, 1500, {.maxSpeed = 90, .minSpeed = 20}, false);
 
     chassis.moveToPoint(-47, 0, 1500, {.forwards = false, .minSpeed = 60, .earlyExitRange = 5,}, false);
-    
-
-}
-/**
- * @brief Scores the second corner.
- */
-void corner2() {
-
-}
-
-void skills() {
-    corner1();
-    
-        // get mobile goal; note: clamp is open at this point
     chassis.moveToPoint(-47, -25, 1500, {.forwards = false, .maxSpeed = 55}, false);
+    
     clamp.toggle();
     pros::delay(100);
 
     // intake 2 rings, moving into position to intake the rest
-    intake.move_voltage(10000);
+    intake.move_voltage(8000);
     chassis.follow(two_txt, 12, 3500, true, false);
 
     chassis.moveToPoint(0, -47, 1000, {.forwards = false, .maxSpeed = 70}, false);
-    chassis.turnToHeading(266.5, 800, {.maxSpeed = 80}, false);
+    chassis.turnToHeading(270, 800, {.maxSpeed = 80}, false);
 
     // // intake the 3 collinear rings
-    //intake.move_voltage(12000);
     chassis.moveToPoint(-59, -48, 2000, {.maxSpeed = 60, .minSpeed = 10}, false);
     pros::delay(600);  // wait to intake ring
     
@@ -123,15 +118,25 @@ void skills() {
 
 
     // get the 6 rings left on the opposite side
-    intake.move_voltage(10000);
-    chassis.moveToPoint(24, -24, 1500, {.maxSpeed = 70}, false);
-    chassis.moveToPoint(0, 0, 1500, {.maxSpeed = 70}, false);
-    chassis.moveToPoint(24, 24, 1500, {.maxSpeed = 70}, false);
-    chassis.moveToPoint(24, 48, 1500, {.maxSpeed = 70}, false);
-    chassis.moveToPoint(48, 48, 1500, {.maxSpeed = 70}, false);
-    chassis.moveToPoint(48, 60, 1500, {.maxSpeed = 70} ,false);
-    chassis.moveToPoint(67, 65, 1500, {.forwards = false, .maxSpeed = 90}, false);
+    intake.move_voltage(8500);
+    chassis.moveToPoint(24, -24, 1600, {.maxSpeed = 70}, false);
+    chassis.moveToPoint(0, 0, 1600, {.maxSpeed = 70}, false);
+    chassis.moveToPoint(24, 24, 1600, {.maxSpeed = 70}, false);
+    chassis.moveToPoint(24, 48, 1600, {.maxSpeed = 70}, false);
+    chassis.moveToPoint(48, 48, 1600, {.maxSpeed = 70}, false);
+    chassis.moveToPoint(48, 60, 1600, {.maxSpeed = 70} ,false);
+    chassis.moveToPoint(67, 65, 1600, {.forwards = false, .maxSpeed = 90}, false);
     clamp.toggle();
+
+    // HANGGGGGG!!!!!!!
+    intake.brake();
+    chassis.moveToPoint(24, 24, 2000, {.forwards = true, .maxSpeed = 60}, false);
+    move_arm_to(1500, 1500);
+    arm.brake();
+    chassis.moveToPoint(0, 0, 1500, {.forwards = false, .maxSpeed = 60}, false);
+    move_arm_to(0, 1500);
+    arm.brake();
+
 }
 
 void arm_test() {

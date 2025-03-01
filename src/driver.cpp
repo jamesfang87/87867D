@@ -7,9 +7,8 @@
  * @return none
  */
 void output_temps() {
-    controller.print(0, 0, "left motors: %f", left_motors.get_temperature());
-    controller.print(1, 0, "right motors: %f", right_motors.get_temperature());
-    controller.print(2, 0, "intake: %f", intake.get_temperature());
+    controller.print(0, 0, "l: %.0f r: %.0f", left_motors.get_temperature(), right_motors.get_temperature());
+    controller.print(1, 0, "i: %.0f a: %.0f", intake.get_temperature(), arm.get_temperature());
 }
 
 /**
@@ -39,7 +38,8 @@ void check_buttons() {
     }
 
     if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_X)) {
-        move_arm_to(250, 1000);
+        move_arm_to(260, 1000);
+        arm.brake();
     }
 }
 
@@ -54,9 +54,11 @@ void check_buttons() {
  */
 void check_intake() {
     if (controller.get_digital(DIGITAL_R1)) {
-        intake.move_voltage(9100);
+        // TODO: Change back for mitchell
+        intake.move_voltage(8000);
     } else if (controller.get_digital(DIGITAL_R2)) {
-        intake.move_voltage(-9100);
+        // TODO: Change back for mitchell
+        intake.move_voltage(-8000);
     } else {
         intake.move_voltage(0);
     }

@@ -35,10 +35,8 @@ void initialize() {
 }
 
 void opcontrol() {
-    //imu.set_heading(90);
-    //skills();
     arm.set_brake_mode_all(pros::E_MOTOR_BRAKE_HOLD);
-    //arm_test();
+    //skills();
     
     
     // loop forever
@@ -59,5 +57,5 @@ void opcontrol() {
 }
 
 void autonomous() {
-    skills();
+    red_neg();
 }
