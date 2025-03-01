@@ -54,11 +54,9 @@ void check_buttons() {
  */
 void check_intake() {
     if (controller.get_digital(DIGITAL_R1)) {
-        // TODO: Change back for mitchell
-        intake.move_voltage(8000);
+        intake.move_voltage(9000);
     } else if (controller.get_digital(DIGITAL_R2)) {
-        // TODO: Change back for mitchell
-        intake.move_voltage(-8000);
+        intake.move_voltage(-9000);
     } else {
         intake.move_voltage(0);
     }

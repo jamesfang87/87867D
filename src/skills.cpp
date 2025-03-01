@@ -28,7 +28,7 @@ void skills() {
     arm.set_zero_position_all(0);
 
     // score alliance stake
-    intake.move_voltage(8000);
+    intake.move_voltage(9000);
     pros::delay(500);
     intake.brake();
 
@@ -43,7 +43,7 @@ void skills() {
     pros::delay(100);
 
     // get ring at (-24, 24) and (24, 48)
-    intake.move_voltage(8000);
+    intake.move_voltage(8750);
     chassis.turnToHeading(90, 700, {}, false);
     chassis.follow(one_txt, 11, 4000, true, false);
     pros::delay(75);
@@ -52,8 +52,12 @@ void skills() {
     chassis.turnToHeading(-90, 800, {.maxSpeed = 80}, false);
 
     // intake the 3 collinear rings
-    chassis.moveToPoint(-59, 49.6, 2750, {.maxSpeed = 48, .minSpeed = 10}, false);
-    pros::delay(600);  // wait to intake ring
+    intake.move_velocity(350);
+    chassis.moveToPoint(-48, 48, 1250, {.maxSpeed = 45, .minSpeed = 27}, false);
+    intake.move_velocity(440);
+    chassis.moveToPoint(-59, 48,1000, {.maxSpeed = 42.75, .minSpeed = 10}, false);
+    pros::delay(400);  // wait to intake ring
+    intake.move_voltage(8700);
     
 
     chassis.moveToPoint(-44, 61, 1200, {.maxSpeed = 60}, false);
@@ -79,16 +83,20 @@ void skills() {
     pros::delay(100);
 
     // intake 2 rings, moving into position to intake the rest
-    intake.move_voltage(8000);
+    intake.move_voltage(8750);
     chassis.follow(two_txt, 12, 3500, true, false);
 
     chassis.moveToPoint(0, -47, 1000, {.forwards = false, .maxSpeed = 70}, false);
     chassis.turnToHeading(270, 800, {.maxSpeed = 80}, false);
 
-    // // intake the 3 collinear rings
-    chassis.moveToPoint(-59, -48, 2000, {.maxSpeed = 60, .minSpeed = 10}, false);
-    pros::delay(600);  // wait to intake ring
-    
+    // intake the 3 collinear rings
+    intake.move_velocity(350);
+    chassis.moveToPoint(-48, -48, 1250, {.maxSpeed = 45, .minSpeed = 27}, false);
+    intake.move_velocity(440);
+    chassis.moveToPoint(-59, -48, 1000, {.maxSpeed = 43, .minSpeed = 10}, false);
+    pros::delay(400);  // wait to intake ring
+    intake.move_voltage(8700);
+
     chassis.moveToPoint(-42, -62, 2000, {.maxSpeed = 65}, false);
     pros::delay(400);  // wait to intake ring
 
@@ -101,7 +109,7 @@ void skills() {
     
     chassis.turnToPoint(60, -24, 700, {.forwards = true, .maxSpeed = 80}, false);
     chassis.moveToPoint(34, -33, 2000, {.forwards = true, .maxSpeed = 90}, false);
-    chassis.moveToPoint(63, -21, 2000, {.forwards = false, .maxSpeed = 60}, false);
+    chassis.moveToPoint(60, -24, 2000, {.forwards = false, .maxSpeed = 60}, false);
     clamp.toggle();
     pros::delay(200);
 
@@ -118,22 +126,26 @@ void skills() {
 
 
     // get the 6 rings left on the opposite side
-    intake.move_voltage(8500);
+    intake.move_velocity(437);
     chassis.moveToPoint(24, -24, 1600, {.maxSpeed = 70}, false);
     chassis.moveToPoint(0, 0, 1600, {.maxSpeed = 70}, false);
     chassis.moveToPoint(24, 24, 1600, {.maxSpeed = 70}, false);
     chassis.moveToPoint(24, 48, 1600, {.maxSpeed = 70}, false);
-    chassis.moveToPoint(48, 48, 1600, {.maxSpeed = 70}, false);
+    chassis.moveToPoint(48, 48.5, 1800, {.maxSpeed = 70}, false);
+    intake.move_velocity(440);
     chassis.moveToPoint(48, 60, 1600, {.maxSpeed = 70} ,false);
-    chassis.moveToPoint(67, 65, 1600, {.forwards = false, .maxSpeed = 90}, false);
+    
+    // put into corner
+    chassis.moveToPoint(63, 78, 2000, {.forwards = false, .maxSpeed = 90}, false);
     clamp.toggle();
+    pros::delay(400);
 
     // HANGGGGGG!!!!!!!
     intake.brake();
-    chassis.moveToPoint(24, 24, 2000, {.forwards = true, .maxSpeed = 60}, false);
+    chassis.moveToPoint(24, 24, 2000, {.forwards = true, .maxSpeed = 70}, false);
     move_arm_to(1500, 1500);
     arm.brake();
-    chassis.moveToPoint(0, 0, 1500, {.forwards = false, .maxSpeed = 60}, false);
+    chassis.moveToPoint(0, 0, 1500, {.forwards = false, .maxSpeed = 65}, false);
     move_arm_to(0, 1500);
     arm.brake();
 
