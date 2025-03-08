@@ -43,7 +43,7 @@ void skills() {
     pros::delay(100);
 
     // get ring at (-24, 24) and (24, 48)
-    intake.move_voltage(8750);
+    intake.move_velocity(360);
     chassis.turnToHeading(90, 700, {}, false);
     chassis.follow(one_txt, 11, 4000, true, false);
     pros::delay(75);
@@ -52,15 +52,15 @@ void skills() {
     chassis.turnToHeading(-90, 800, {.maxSpeed = 80}, false);
 
     // intake the 3 collinear rings
-    intake.move_velocity(350);
-    chassis.moveToPoint(-48, 48, 1250, {.maxSpeed = 45, .minSpeed = 27}, false);
-    intake.move_velocity(440);
-    chassis.moveToPoint(-59, 48,1000, {.maxSpeed = 42.75, .minSpeed = 10}, false);
+    intake.move_velocity(300);
+    chassis.moveToPoint(-48, 48, 1250, {.maxSpeed = 43, .minSpeed = 27}, false);
+    intake.move_velocity(400);
+    chassis.moveToPoint(-59, 48,1000, {.maxSpeed = 42, .minSpeed = 10}, false);
     pros::delay(400);  // wait to intake ring
-    intake.move_voltage(8700);
+    intake.move_velocity(340);
     
 
-    chassis.moveToPoint(-44, 61, 1200, {.maxSpeed = 60}, false);
+    chassis.moveToPoint(-44, 64, 1200, {.maxSpeed = 65}, false);
     pros::delay(200);  // wait to intake ring
 
     // put goal into corner
@@ -83,7 +83,7 @@ void skills() {
     pros::delay(100);
 
     // intake 2 rings, moving into position to intake the rest
-    intake.move_voltage(8750);
+    intake.move_velocity(350);
     chassis.follow(two_txt, 12, 3500, true, false);
 
     chassis.moveToPoint(0, -47, 1000, {.forwards = false, .maxSpeed = 70}, false);
@@ -92,12 +92,12 @@ void skills() {
     // intake the 3 collinear rings
     intake.move_velocity(350);
     chassis.moveToPoint(-48, -48, 1250, {.maxSpeed = 45, .minSpeed = 27}, false);
-    intake.move_velocity(440);
-    chassis.moveToPoint(-59, -48, 1000, {.maxSpeed = 43, .minSpeed = 10}, false);
+    intake.move_velocity(400);
+    chassis.moveToPoint(-59, -48, 1000, {.maxSpeed = 42.5, .minSpeed = 10}, false);
     pros::delay(400);  // wait to intake ring
-    intake.move_voltage(8700);
+    intake.move_velocity(340);
 
-    chassis.moveToPoint(-42, -62, 2000, {.maxSpeed = 65}, false);
+    chassis.moveToPoint(-44, -64, 2000, {.maxSpeed = 65}, false);
     pros::delay(400);  // wait to intake ring
 
     // put goal into corner
@@ -114,8 +114,9 @@ void skills() {
     pros::delay(200);
 
     // put goal in corner
-    chassis.moveToPoint(66, -59, 1500, {.forwards = false, .maxSpeed = 80}, false);
+    chassis.moveToPoint(66, -59, 1700, {.forwards = false, .maxSpeed = 80}, false);
     clamp.toggle();
+    pros::delay(200);
 
     // get into a more favorable position to clamp onto the middle mobile goal
     chassis.moveToPoint(48, -24, 1500, {.maxSpeed = 70}, false);
@@ -126,22 +127,24 @@ void skills() {
 
 
     // get the 6 rings left on the opposite side
-    intake.move_velocity(437);
-    chassis.moveToPoint(24, -24, 1600, {.maxSpeed = 70}, false);
-    chassis.moveToPoint(0, 0, 1600, {.maxSpeed = 70}, false);
-    chassis.moveToPoint(24, 24, 1600, {.maxSpeed = 70}, false);
-    chassis.moveToPoint(24, 48, 1600, {.maxSpeed = 70}, false);
+    intake.move_velocity(400);
+    chassis.moveToPoint(24, -24, 1700, {.maxSpeed = 70}, false);
+    chassis.moveToPoint(0, 0, 1700, {.maxSpeed = 70}, false);
+    chassis.moveToPoint(24, 24, 1700, {.maxSpeed = 70}, false);
+    chassis.moveToPoint(24, 48, 1700, {.maxSpeed = 70}, false);
     chassis.moveToPoint(48, 48.5, 1800, {.maxSpeed = 70}, false);
-    intake.move_velocity(440);
-    chassis.moveToPoint(48, 60, 1600, {.maxSpeed = 70} ,false);
+    intake.move_velocity(420);
+    chassis.moveToPoint(48, 64, 1700, {.maxSpeed = 70} ,false);
     
     // put into corner
-    chassis.moveToPoint(63, 78, 2000, {.forwards = false, .maxSpeed = 90}, false);
+    chassis.moveToPoint(59, 78, 2000, {.forwards = false, .maxSpeed = 90}, false);
     clamp.toggle();
-    pros::delay(400);
+    pros::delay(1200);
 
     // HANGGGGGG!!!!!!!
     intake.brake();
+    move_arm_to(700, 1500);
+    move_arm_to(0, 1500);
     chassis.moveToPoint(24, 24, 2000, {.forwards = true, .maxSpeed = 70}, false);
     move_arm_to(1500, 1500);
     arm.brake();

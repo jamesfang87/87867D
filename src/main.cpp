@@ -36,7 +36,7 @@ void initialize() {
 
 void opcontrol() {
     arm.set_brake_mode_all(pros::E_MOTOR_BRAKE_HOLD);
-    skills();
+    //skills();
     
     
     // loop forever
@@ -57,5 +57,5 @@ void opcontrol() {
 }
 
 void autonomous() {
-    red_neg();
+    blue_elim();
 }
