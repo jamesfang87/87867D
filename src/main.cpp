@@ -57,5 +57,5 @@ void opcontrol() {
 }
 
 void autonomous() {
-    red_neg();
+    blue_elim();
 }
