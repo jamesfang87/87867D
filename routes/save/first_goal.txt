@@ -1,0 +1,27 @@
+-61.415, 31.722, 95.055
+-59.415, 31.72, 92.344
+-57.415, 31.713, 89.551
+-55.415, 31.699, 86.669
+-53.415, 31.678, 83.687
+-51.416, 31.644, 80.594
+-49.416, 31.596, 77.379
+-47.418, 31.525, 74.023
+-45.42, 31.425, 70.509
+-43.425, 31.282, 66.809
+-41.436, 31.073, 62.893
+-39.459, 30.775, 58.716
+-37.506, 30.348, 54.219
+-35.591, 29.772, 49.314
+-33.724, 29.055, 43.863
+-31.893, 28.251, 37.63
+-30.078, 27.412, 30.133
+-28.263, 26.571, 20
+-27.514, 26.228, 0
+-27.514, 26.228, 0
+-9.328, 17.905, 0
+endData
+127
+100
+200
+-61.415, 31.722, -37.1, 31.722, -37.801, 30.904, -27.514, 26.228
+#PATH.JERRYIO-DATA {"appVersion":"0.8.3","format":"LemLib v0.5","gc":{"robotWidth":14,"robotHeight":16.5,"robotIsHolonomic":false,"showRobot":true,"uol":2.54,"pointDensity":2,"controlMagnetDistance":0.7750015500031,"fieldImage":{"displayName":"V5RC 2025 - High Stakes","signature":"V5RC 2025 - High Stakes","origin":{"__type":"built-in"}},"coordinateSystem":"VEX Gaming Positioning System"},"paths":[{"segments":[{"controls":[{"uid":"AhgL3H1eVA","x":-61.41526993366848,"y":31.72233829983303,"lock":false,"visible":true,"heading":270,"__type":"end-point"},{"uid":"RPhogrTBI0","x":-37.099798359504014,"y":31.72233829983303,"lock":false,"visible":true,"__type":"control"},{"uid":"kBA4gmt9FH","x":-37.80120619337415,"y":30.90402916031788,"lock":false,"visible":true,"__type":"control"},{"uid":"EyGUb6fNA4","x":-27.513891296612258,"y":26.22797693451702,"lock":false,"visible":true,"heading":297.89999999999964,"__type":"end-point"}],"speedProfiles":[],"lookaheadKeyframes":[],"uid":"xlctF0Bc4D"}],"pc":{"speedLimit":{"minLimit":{"value":0,"label":"0"},"maxLimit":{"value":127,"label":"127"},"step":1,"from":20,"to":100},"bentRateApplicableRange":{"minLimit":{"value":0,"label":"0"},"maxLimit":{"value":1,"label":"1"},"step":0.001,"from":0,"to":0.1},"maxDecelerationRate":127},"name":"Path","uid":"DkSY3LH1f7","lock":false,"visible":true}]}
