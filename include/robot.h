@@ -16,6 +16,7 @@ extern pros::MotorGroup arm;
 extern pros::Rotation arm_encoder;
 
 extern pros::Imu imu;
+extern pros::Imu imu2;
 extern pros::Rotation horizontal_encoder;
 extern pros::Rotation vertical_encoder;
 

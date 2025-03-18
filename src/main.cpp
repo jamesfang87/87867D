@@ -17,19 +17,22 @@ void initialize() {
     arm_encoder.set_position(0);
     // print position to brain screen
     pros::Task screen_task([&]() {
+        double first = imu.get_heading();
         while (true) {
             // print robot location to the brain screen
             pros::lcd::print(0, "X: %f", chassis.getPose().x); // x
             pros::lcd::print(1, "Y: %f", chassis.getPose().y); // y
             pros::lcd::print(2, "Theta: %f", chassis.getPose().theta); // heading
 
-            pros::lcd::print(3, "imu: %f", imu.get_heading());
+            pros::lcd::print(3, "imu1: %f", imu.get_heading());
+            pros::lcd::print(4, "imu2: %f", imu2.get_heading());
+            pros::lcd::print(5, "error: %f", imu.get_heading() - first);
 
             printf("X: %f\n", chassis.getPose().x);
             printf("Y: %f\n", chassis.getPose().y);
             printf("Theta: %f\n", chassis.getPose().theta);
             // delay to save resources
-            pros::delay(20);
+            pros::delay(10);
         }
     });
 }
@@ -50,12 +53,12 @@ void opcontrol() {
         int rightX = controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X);
 
         // move the robot
-        chassis.arcade(leftY, rightX);
+        chassis.arcade(leftY, rightX * 0.7);
 
         pros::delay(10); // Wait for 10 milliseconds
     }
 }
 
 void autonomous() {
-    blue_elim();
+    skills();
 }

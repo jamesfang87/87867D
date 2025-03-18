@@ -1,5 +1,4 @@
 #include "skills.h"
-#include <cstdio>
 #include "pros/rtos.hpp"
 
 ASSET(one_txt);
@@ -43,7 +42,7 @@ void skills() {
     pros::delay(100);
 
     // get ring at (-24, 24) and (24, 48)
-    intake.move_velocity(360);
+    //intake.move_velocity(360);
     chassis.turnToHeading(90, 700, {}, false);
     chassis.follow(one_txt, 11, 4000, true, false);
     pros::delay(75);
@@ -52,13 +51,12 @@ void skills() {
     chassis.turnToHeading(-90, 800, {.maxSpeed = 80}, false);
 
     // intake the 3 collinear rings
-    intake.move_velocity(300);
+    //intake.move_velocity(300);
     chassis.moveToPoint(-48, 48, 1250, {.maxSpeed = 43, .minSpeed = 27}, false);
-    intake.move_velocity(400);
+    //intake.move_velocity(400);
     chassis.moveToPoint(-59, 48,1000, {.maxSpeed = 42, .minSpeed = 10}, false);
     pros::delay(400);  // wait to intake ring
-    intake.move_velocity(340);
-    
+    //intake.move_velocity(340);
 
     chassis.moveToPoint(-44, 64, 1200, {.maxSpeed = 65}, false);
     pros::delay(200);  // wait to intake ring
@@ -151,7 +149,7 @@ void skills() {
     chassis.moveToPoint(0, 0, 1500, {.forwards = false, .maxSpeed = 65}, false);
     move_arm_to(0, 1500);
     arm.brake();
-
+    
 }
 
 void arm_test() {
