@@ -25,8 +25,7 @@ void initialize() {
             pros::lcd::print(2, "Theta: %f", chassis.getPose().theta); // heading
 
             pros::lcd::print(3, "imu1: %f", imu.get_heading());
-            pros::lcd::print(4, "imu2: %f", imu2.get_heading());
-            pros::lcd::print(5, "error: %f", imu.get_heading() - first);
+            pros::lcd::print(4, "error: %f", imu.get_heading() - first);
 
             printf("X: %f\n", chassis.getPose().x);
             printf("Y: %f\n", chassis.getPose().y);

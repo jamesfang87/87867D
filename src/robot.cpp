@@ -19,7 +19,6 @@ pros::MotorGroup arm({11, -18}, pros::MotorGearset::green);
 pros::Rotation arm_encoder(19);
 
 pros::Imu imu(17);
-pros::Imu imu2(12);
 
 pros::Rotation horizontal_encoder(13);
 pros::Rotation vertical_encoder(5);
