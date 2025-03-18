@@ -18,10 +18,10 @@ pros::Motor intake(4, pros::MotorGearset::blue);
 pros::MotorGroup arm({11, -18}, pros::MotorGearset::green);
 pros::Rotation arm_encoder(19);
 
-pros::Imu imu(12);
+pros::Imu imu(17);
 
 pros::Rotation horizontal_encoder(13);
-pros::Rotation vertical_encoder(-5);
+pros::Rotation vertical_encoder(5);
 
 // horizontal tracking wheel
 lemlib::TrackingWheel horizontal_tracking_wheel(&horizontal_encoder, lemlib::Omniwheel::NEW_275, -4.75);

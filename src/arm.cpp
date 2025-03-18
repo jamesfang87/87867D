@@ -24,11 +24,11 @@ void move_arm_to(float target, float time_limit = 2000) {
 }
 
 void move_arm_up() {
-    arm.move_voltage(12000);
+    arm.move_velocity(150);
 }
 
 void move_arm_down() {
-    arm.move_voltage(-12000);
+    arm.move_voltage(-150);
 }
 
 void stop_arm() {
