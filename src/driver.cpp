@@ -38,7 +38,7 @@ void check_buttons() {
     }
 
     if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_X)) {
-        move_arm_to(260, 1000);
+        move_arm_to(250, 1000);
         arm.brake();
     }
 }

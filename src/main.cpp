@@ -24,8 +24,7 @@ void initialize() {
             pros::lcd::print(1, "Y: %f", chassis.getPose().y); // y
             pros::lcd::print(2, "Theta: %f", chassis.getPose().theta); // heading
 
-            pros::lcd::print(3, "imu1: %f", imu.get_heading());
-            pros::lcd::print(4, "error: %f", imu.get_heading() - first);
+            pros::lcd::print(3, "imu: %f", imu.get_heading());
 
             printf("X: %f\n", chassis.getPose().x);
             printf("Y: %f\n", chassis.getPose().y);
@@ -37,9 +36,9 @@ void initialize() {
 }
 
 void opcontrol() {
+        chassis.setPose(-63, 0, 90);
+    arm.set_zero_position_all(0);
     arm.set_brake_mode_all(pros::E_MOTOR_BRAKE_HOLD);
-    //skills();
-    
     
     // loop forever
     while (true) {
