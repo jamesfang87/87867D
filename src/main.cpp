@@ -6,6 +6,7 @@
 #include "lemlib/api.hpp" // IWYU pragma: keep
 
 // User defined file imports
+#include "pros/rtos.hpp"
 #include "robot.h"
 #include "driver.h"
 #include "auton.h"
@@ -28,9 +29,8 @@ void initialize() {
             pros::lcd::print(2, "Theta: %f", chassis.getPose().theta); // heading
             pros::lcd::print(3, "imu: %f", imu.get_heading());
 
-            printf("X: %f\n", chassis.getPose().x);
-            printf("Y: %f\n", chassis.getPose().y);
-            printf("Theta: %f\n", chassis.getPose().theta);
+            printf("Rotation sensor (port 5): %f\t| Y: %f\n", vertical_tracking_wheel.getDistanceTraveled(), 
+                                                            chassis.getPose().y);
             // delay to save resources
             pros::delay(10);
         }
@@ -65,4 +65,18 @@ void autonomous() {
     // blue_pos();
     // red_elim();
     // blue_elim();
+}
+
+void straight_line_odom_test(int speed) {
+    chassis.setPose(0, 0, 0);
+    // wait for 2 seconds and let the program output position
+    // in order to measure noise from rotation sensors
+    pros::delay(2000);
+    chassis.moveToPoint(0, 24, 3000, {.maxSpeed = (float)speed}, false);
+}
+
+void turn_odom_test(int speed) {
+    //!Change the program to display rotation sensor readings!
+    chassis.setPose(0, 0, 0);
+    chassis.turnToHeading(90, 3000, {.maxSpeed = speed}, false);
 }
