@@ -36,9 +36,9 @@ void initialize() {
 }
 
 void opcontrol() {
-        chassis.setPose(-63, 0, 90);
-    arm.set_zero_position_all(0);
     arm.set_brake_mode_all(pros::E_MOTOR_BRAKE_HOLD);
+    //skills();
+    
     
     // loop forever
     while (true) {
@@ -58,5 +58,11 @@ void opcontrol() {
 }
 
 void autonomous() {
-    skills();
+    // skills();
+    // red_neg();
+    red_pos();
+    // blue_neg();
+    // blue_pos();
+    // red_elim();
+    // blue_elim();
 }

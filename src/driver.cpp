@@ -30,6 +30,10 @@ void check_buttons() {
     // bind temperature check to button 'B'
     if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_B)) {
         output_temps();
+<<<<<<< HEAD
+=======
+        sweeper.toggle();
+>>>>>>> origin/test
     }
 
     // bind intake lift to button 'A'
@@ -38,7 +42,11 @@ void check_buttons() {
     }
 
     if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_X)) {
+<<<<<<< HEAD
         move_arm_to(250, 1000);
+=======
+        move_arm_to(260, 1000);
+>>>>>>> origin/test
         arm.brake();
     }
 }
@@ -54,9 +62,15 @@ void check_buttons() {
  */
 void check_intake() {
     if (controller.get_digital(DIGITAL_R1)) {
+<<<<<<< HEAD
         intake.move_velocity(300);
     } else if (controller.get_digital(DIGITAL_R2)) {
         intake.move_velocity(-300);
+=======
+        intake.move_velocity(900);
+    } else if (controller.get_digital(DIGITAL_R2)) {
+        intake.move_velocity(-900);
+>>>>>>> origin/test
     } else {
         intake.move_voltage(0);
     }
