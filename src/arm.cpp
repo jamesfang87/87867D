@@ -7,13 +7,7 @@ void move_arm_to(float target, float time_limit = 2000) {
 
         float pos = arm_encoder.get_angle();
         float error = target - pos;
-
-        printf("arm pos: %f\n", pos);
-        printf("target: %f\n", target);
-        printf("%f\n", error);
         while (fabs(error) > 5 && time < time_limit) {
-            printf("%f\n", error);
-            printf("run\n");
             float output = arm_pid.update(error);
             arm.move_velocity(output);
             error = target - arm.get_position();
