@@ -30,6 +30,7 @@ void check_buttons() {
     // bind temperature check to button 'B'
     if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_B)) {
         output_temps();
+        sweeper.toggle();
     }
 
     // bind intake lift to button 'A'
@@ -54,9 +55,9 @@ void check_buttons() {
  */
 void check_intake() {
     if (controller.get_digital(DIGITAL_R1)) {
-        intake.move_velocity(300);
+        intake.move_velocity(900);
     } else if (controller.get_digital(DIGITAL_R2)) {
-        intake.move_velocity(-300);
+        intake.move_velocity(-900);
     } else {
         intake.move_voltage(0);
     }

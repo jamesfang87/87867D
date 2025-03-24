@@ -38,5 +38,6 @@ extern lemlib::Chassis chassis;
 // Pneumatics
 extern pros::adi::Pneumatics clamp;
 extern pros::adi::Pneumatics intake_lift;
+extern pros::adi::Pneumatics sweeper;
 
 #endif

@@ -28,7 +28,7 @@ void move_arm_up() {
 }
 
 void move_arm_down() {
-    arm.move_voltage(-150);
+    arm.move_velocity(-150);
 }
 
 void stop_arm() {
