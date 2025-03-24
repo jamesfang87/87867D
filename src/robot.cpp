@@ -67,6 +67,6 @@ lemlib::Chassis chassis(drivetrain, // drivetrain settings
 );
 
 // Pneumatics
-pros::adi::Pneumatics clamp(2, true);
 pros::adi::Pneumatics intake_lift(1, false);
+pros::adi::Pneumatics clamp(2, true);
 pros::adi::Pneumatics sweeper(3, false);

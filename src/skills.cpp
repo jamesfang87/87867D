@@ -4,7 +4,9 @@
 ASSET(one_txt);
 ASSET(two_txt);
 
-
+/**
+ * @brief Util function to clamp onto a goal
+ */
 void clamp_goal() {
     pros::delay(100);
     clamp.set_value(0);
