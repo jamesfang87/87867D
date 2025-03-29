@@ -16,9 +16,13 @@
 // initialize function. Runs on program startup
 void initialize() {
     pros::lcd::initialize(); // initialize brain screen
+    vertical_encoder.set_data_rate(5);
+    horizontal_encoder.set_data_rate(5);
     chassis.calibrate(); // calibrate sensors
     arm.set_brake_mode_all(pros::E_MOTOR_BRAKE_HOLD);
     arm_encoder.set_position(0);
+
+
     // print position to brain screen
     pros::Task screen_task([&]() {
         double first = imu.get_heading();
@@ -28,9 +32,6 @@ void initialize() {
             pros::lcd::print(1, "Y: %f", chassis.getPose().y); // y
             pros::lcd::print(2, "Theta: %f", chassis.getPose().theta); // heading
             pros::lcd::print(3, "imu: %f", imu.get_heading());
-
-            printf("Rotation sensor (port 5): %f\t| Y: %f\n", vertical_tracking_wheel.getDistanceTraveled(), 
-                                                            chassis.getPose().y);
             // delay to save resources
             pros::delay(10);
         }
@@ -58,25 +59,6 @@ void opcontrol() {
 }
 
 void autonomous() {
-    // skills();
-    // red_neg();
-    red_pos();
-    // blue_neg();
-    // blue_pos();
-    // red_elim();
-    // blue_elim();
+    skills();
 }
 
-void straight_line_odom_test(int speed) {
-    chassis.setPose(0, 0, 0);
-    // wait for 2 seconds and let the program output position
-    // in order to measure noise from rotation sensors
-    pros::delay(2000);
-    chassis.moveToPoint(0, 24, 3000, {.maxSpeed = (float)speed}, false);
-}
-
-void turn_odom_test(int speed) {
-    //!Change the program to display rotation sensor readings!
-    chassis.setPose(0, 0, 0);
-    chassis.turnToHeading(90, 3000, {.maxSpeed = speed}, false);
-}

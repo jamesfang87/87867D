@@ -24,9 +24,9 @@ pros::Rotation horizontal_encoder(13);
 pros::Rotation vertical_encoder(5);
 
 // horizontal tracking wheel
-lemlib::TrackingWheel horizontal_tracking_wheel(&horizontal_encoder, lemlib::Omniwheel::NEW_275, -4.125);
+lemlib::TrackingWheel horizontal_tracking_wheel(&horizontal_encoder, lemlib::Omniwheel::NEW_275, -5.7);
 // vertical tracking wheel
-lemlib::TrackingWheel vertical_tracking_wheel(&vertical_encoder, lemlib::Omniwheel::NEW_275, -1.375);
+lemlib::TrackingWheel vertical_tracking_wheel(&vertical_encoder, lemlib::Omniwheel::NEW_275, -1.3);
 
 lemlib::OdomSensors sensors(&vertical_tracking_wheel, // vertical tracking wheel 1, set to null
                         nullptr, // vertical tracking wheel 2, set to nullptr as we are using IMEs
@@ -50,7 +50,7 @@ lemlib::ControllerSettings lateral_controller(4.3, // proportional gain (kP)
 // angular PID controller
 lemlib::ControllerSettings angular_controller(1.7, // proportional gain (kP)
                                             0, // integral gain (kI)
-                                            12.5, // derivative gain (kD)
+                                            12.3, // derivative gain (kD)
                                             0, // anti windup
                                             0, // small error range, in degrees
                                             0, // small error range timeout, in milliseconds
