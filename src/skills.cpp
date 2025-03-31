@@ -13,7 +13,6 @@ void clamp_goal() {
 }
 
 void skills() {
-    
     chassis.setPose(-63, 0, 90);
     arm.set_zero_position_all(0);
     arm.set_brake_mode_all(pros::E_MOTOR_BRAKE_HOLD);
@@ -44,6 +43,8 @@ void skills() {
     chassis.moveToPoint(49.178, 59.727, 1000, {.maxSpeed = 60, .minSpeed = 10}, false);
 
     chassis.moveToPoint(0, 48, 1000, {.forwards = false, .maxSpeed = 80}, false);
+
+
 
     clamp.toggle();
     intake.move_velocity(0);
@@ -160,10 +161,23 @@ void skills() {
 }
 
 void arm_test() {
-    chassis.setPose(0, -48, 180);
-    move_arm_to(250, 1000);
-    intake.move_voltage(10000);
-    chassis.moveToPoint(0, -65, 2000, {.maxSpeed = 70}, false);
-    move_arm_to(2000, 2000);
+    chassis.setPose(0, -36, 180);
+    move_arm_to(20, 1000);
+    intake.move_velocity(370);
+    chassis.moveToPoint(0, -65.5, 1000, {.maxSpeed = 75}, false);
+    intake.move_velocity(-10);
+    intake.move_velocity(0);
+    move_arm_to(170, 2000);
+    chassis.moveToPoint(0, -65.5, 1000, {.maxSpeed = 75}, false);
+    chassis.moveToPoint(0, -48, 1000, {.forwards = false, .maxSpeed = 70,}, false);
 
+    move_arm_to(20, 1000);
+    pros::delay(1000);
+    intake.move_velocity(370);
+    chassis.moveToPoint(0, -66, 1000, {.maxSpeed = 75}, false);
+    intake.move_velocity(-10);
+    intake.move_velocity(0);
+    move_arm_to(170, 2000);
+    chassis.moveToPoint(0, -65.5, 1200, {.maxSpeed = 75}, false);
+    chassis.moveToPoint(0, -48, 1000, {.forwards = false, .maxSpeed = 70,}, false);
 }

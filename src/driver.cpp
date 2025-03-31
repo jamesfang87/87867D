@@ -8,8 +8,7 @@
  * @return none
  */
 void output_temps() {
-    controller.print(0, 0, "l: %.0f r: %.0f", left_motors.get_temperature(), right_motors.get_temperature());
-    controller.print(1, 0, "i: %.0f a: %.0f", intake.get_temperature(), arm.get_temperature());
+    controller.print(0, 0, "i: %.0f a: %.0f", intake.get_temperature(), arm.get_temperature());
 }
 
 /**
@@ -40,7 +39,7 @@ void check_buttons() {
     }
 
     if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_X)) {
-        move_arm_to(250, 2000);
+        move_arm_to(20, 2000);
         arm.brake();
     }
 }

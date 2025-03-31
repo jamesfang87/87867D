@@ -15,8 +15,8 @@ lemlib::Drivetrain drivetrain(&left_motors, // left motor group
 
 pros::Motor intake(4, pros::MotorGearset::blue);
 
-pros::MotorGroup arm({11, -18}, pros::MotorGearset::green);
-pros::Rotation arm_encoder(19);
+pros::MotorGroup arm({11, -19}, pros::MotorGearset::green);
+pros::Rotation arm_encoder(18);
 
 pros::Imu imu(17);
 
