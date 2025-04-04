@@ -32,30 +32,35 @@ void blue_neg() {
 ASSET(redneg1_txt);
 void red_neg() {
     //alliance stake
-    chassis.setPose(-60, 12, 230);
-    move_arm_to(260, 1000);
+    chassis.setPose(-60, 10, 230);
+    move_arm_to(20, 1000);
     arm.brake();
+    pros::delay(150);
     intake.move_velocity(400);
-    pros::delay(80);
+    pros::delay(350);
     intake.brake();
-    move_arm_to(0, 1500);
+    move_arm_to(250, 1500);
+    arm.brake();
+    pros::delay(600);
 
     //mogo
     chassis.follow(redneg1_txt, 12, 2500, false, false);
     clamp.toggle();
+    move_arm_to(0, 1500);
+    pros::delay(30);
 
     //ring 1
-    chassis.turnToPoint(-24, 48, 800, {.maxSpeed = 90}, false);
+    chassis.turnToPoint(-22, 48, 800, {.maxSpeed = 90}, false);
     intake.move_velocity(400);
-    chassis.moveToPoint(-24, -50, 1000, {.forwards = true, .maxSpeed = 70}, false);
+    chassis.moveToPoint(-22, 50, 1000, {.forwards = true, .maxSpeed = 70}, false);
 
-    //ring 2 and 3
-    chassis.turnToPoint(0, 53, 800, {.maxSpeed = 90}, false);
-    intake.move_velocity(400);
-    chassis.moveToPoint(-5, -53, 1000, {.forwards = true, .maxSpeed = 60}, false);
+    // //ring 2 and 3
+    // chassis.turnToPoint(0, 53, 800, {.maxSpeed = 90}, false);
+    // intake.move_velocity(400);
+    // chassis.moveToPoint(-3, 51.5, 1000, {.forwards = true, .maxSpeed = 60}, false);
 
-    chassis.moveToPoint(-18, 47, 1000, {.forwards = false, .maxSpeed = 60}, false);
-    chassis.moveToPoint(-6, 44.5, 1000, {.forwards = true, .maxSpeed = 60}, false);
+    // chassis.moveToPoint(-18, 45, 1000, {.forwards = false, .maxSpeed = 60}, false);
+    // chassis.moveToPoint(-3, 43, 1000, {.forwards = true, .maxSpeed = 60}, false);
 
     
 
@@ -74,14 +79,14 @@ void red_pos() {
     pros::delay(900);
 
     sweeper.toggle();
-    // pros::delay(50);
+    // pros::delay(50); 
 
     chassis.moveToPoint(-35, -60, 1000, {.forwards = false, .maxSpeed = 80}, false);
     sweeper.toggle();
     pros::delay(30);
 
     chassis.turnToPoint(-70, -70, 800, {.maxSpeed = 90}, true);
-    chassis.moveToPoint(-15, -58, 1000, {.forwards = false, .maxSpeed = 60}, false);
+    chassis.moveToPoint(-15, -62, 1000, {.forwards = false, .maxSpeed = 60}, false);
     pros::delay(80);
     clamp.toggle();
     pros::delay(40);
@@ -91,14 +96,14 @@ void red_pos() {
     pros::delay(120);
 
     //grab other ring (not tested)
-    chassis.turnToPoint(-10, -48, 800, {.maxSpeed = 90}, true);
+    chassis.turnToPoint(-24, -48, 800, {.maxSpeed = 90}, true);
     intake.move_velocity(280);
     pros::delay(60);
-    chassis.moveToPoint(-10, -46, 1000, {.forwards = true, .maxSpeed = 50}, false);
+    chassis.moveToPoint(-24, -48, 1000, {.forwards = true, .maxSpeed = 50}, false);
     intake.brake();
 
     // drop the goal
-    chassis.moveToPoint(-50, -60, 2000, {.forwards = false, .maxSpeed = 70}, false);
+    chassis.moveToPoint(-50, -60, 1500, {.forwards = false, .maxSpeed = 70}, false);
     clamp.toggle();
     
     
@@ -108,16 +113,17 @@ void red_pos() {
     clamp.toggle();
     pros::delay(30);
     intake.move_velocity(400);
-    pros::delay(50);
+    pros::delay(800);
+    intake.brake();
     clamp.toggle();
 
     //hang
-    move_arm_to(1500, 1500);
+    move_arm_to(250, 1500);
     arm.brake();
-    // chassis.turnToPoint(0, 0, 800, {.maxSpeed = 90}, true);
-    chassis.moveToPoint(0, 0, 1500, {.forwards = false, .maxSpeed = 70}, false);
+    chassis.turnToPoint(0, 0, 800, {.maxSpeed = 90}, false);
+    chassis.moveToPoint(15, 15, 1500, {.forwards = false, .maxSpeed = 90}, false);
     move_arm_to(0, 1500);
-    arm.brake();
+    arm.brake(); 
 
 }
  
