@@ -16,7 +16,7 @@ void toggle_clamp() {
  * @brief Util function to score a single ring onto the high stake. 
  * @pre the arm is already holding a ring and the robot is already in position to score
  * 
- * @param align_with the coordinates of the high stake which the robot should score on 
+ * @param stake_pos the coordinates of the high stake which the robot should score on 
  */
 void score_high_stake(lemlib::Pose stake_pos) {
     auto [x, y, _] = stake_pos;
