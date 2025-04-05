@@ -47,14 +47,13 @@ void skills() {
     chassis.moveToPoint(-23.5, 23.5, 800, {.maxSpeed = 70}, false);
     
     // WTF MY ROBOT IS TOO FAT
-    intake.move_velocity(400);
     chassis.moveToPose(23.5, 47, 72, 2000, {.maxSpeed = 90, .minSpeed = 55}, false);
     
     // load this ring onto the arm
     intake.move_velocity(370);
     chassis.turnToPoint(47, 59, 600, {.maxSpeed = 127, .minSpeed = 40});  // ! check the min speed
     chassis.moveToPoint(47, 59, 1200, {.maxSpeed = 70, .minSpeed = 20});
-    move_arm_to(25, 800);
+    move_arm_to(20, 800);
 
     // score ring 1 on high stake
     chassis.moveToPoint(0.5, 40, 1500, {.forwards = false, .maxSpeed = 80}, false);
