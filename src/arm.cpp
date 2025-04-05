@@ -13,7 +13,7 @@ void move_arm_to(float target, int time_limit = 2000) {
 
         float error = target - arm_encoder.get_position() / 100.0;
         while (fabs(error) > 0.1 && time < time_limit) {
-            float output = arm_pid.update(error) + 40 * (target == 170.0);  // scuffed min speed
+            float output = arm_pid.update(error);
             arm.move_velocity(output);
             error = target - arm_encoder.get_position() / 100.0;
             time += 10;
