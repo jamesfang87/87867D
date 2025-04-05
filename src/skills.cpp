@@ -23,7 +23,7 @@ void score_high_stake(lemlib::Pose stake_pos) {
     intake.move_velocity(-90);
     chassis.turnToPoint(x, y, 500, {.maxSpeed = 75}, false);
     intake.move_velocity(0);
-    move_arm_to(135, 2000);
+    move_arm_to_fast(135, 2000);
     chassis.moveToPoint(x, y, 800, {.maxSpeed = 75}, false);
 }
 
