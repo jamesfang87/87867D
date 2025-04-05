@@ -1,4 +1,6 @@
 #include "skills.h"
+#include "lemlib/pose.hpp"
+#include "pros/llemu.hpp"
 #include "pros/rtos.hpp"
 
 ASSET(one_txt);
@@ -6,15 +8,35 @@ ASSET(one_txt);
 /**
  * @brief Util function to clamp onto a goal
  */
-void clamp_goal() {
+void toggle_clamp() {
     pros::delay(100);
-    clamp.set_value(0);
+    clamp.toggle();
     pros::delay(100);
+}
+
+/**
+ * @brief Util function to unclamp  a goal
+ */
+void unclamp_goal() {
+    pros::delay(100);
+    clamp.retract();
+    pros::delay(100);
+}
+
+
+
+void score_high_stake(lemlib::Pose align_with) {
+    auto [x, y, _] = align_with;
+    intake.move_velocity(-90);
+    chassis.turnToPoint(x, y, 500, {.maxSpeed = 75}, false);
+    intake.move_velocity(0);
+    move_arm_to(135, 2000);
+    chassis.moveToPoint(x, y, 800, {.maxSpeed = 75}, false);
 }
 
 void skills() {
     chassis.setPose(-63, 0, 90);
-    arm.set_zero_position_all(0);
+    arm_encoder.set_position(0);
     arm.set_brake_mode_all(pros::E_MOTOR_BRAKE_HOLD);
 
     // score alliance stake
@@ -25,68 +47,70 @@ void skills() {
     // move forward and turn towards goal on left side of the robot (viewed from red side)
     chassis.moveToPoint(-48, 0, 800);
     chassis.turnToPoint(-48, 24, 700, {.forwards = false}, false);
-    chassis.moveToPoint(-48, 24, 700, {.forwards = false, .maxSpeed = 70, .minSpeed = 10}, false);
-    
-    // clamp goal
-    pros::delay(100);
-    clamp.toggle();
-    pros::delay(100);
+    chassis.moveToPoint(-48, 24, 1000, {.forwards = false, .maxSpeed = 70, .minSpeed = 5}, false);
+    toggle_clamp();
 
-    intake.move_velocity(350);
+    intake.move_velocity(355);
     chassis.moveToPoint(-23.5, 23.5, 800, {.maxSpeed = 70}, false);
     
     // WTF MY ROBOT IS TOO FAT
-    chassis.moveToPose(24, 48, 72, 2200, {.maxSpeed = 90, .minSpeed = 55});
-    pros::delay(3000);
-    move_arm_to(250, 2000);
-    chassis.turnToPoint(49.178, 59.727,  500);
-    chassis.moveToPoint(49.178, 59.727, 1000, {.maxSpeed = 60, .minSpeed = 10}, false);
-
-    chassis.moveToPoint(0, 48, 1000, {.forwards = false, .maxSpeed = 80}, false);
-
-
-
-    clamp.toggle();
-    intake.move_velocity(0);
+    intake.move_velocity(400);
+    chassis.moveToPose(23.5, 47, 72, 2000, {.maxSpeed = 90, .minSpeed = 55}, false);
     
-    // // get ring at (-24, 24) and (24, 48)
-    // //intake.move_velocity(360);
-    // chassis.turnToHeading(90, 700, {}, false);
-    // chassis.follow(one_txt, 11, 4000, true, false);
-    // pros::delay(75);
+    intake.move_velocity(370);
+    chassis.turnToPoint(47, 59, 800);
+    chassis.moveToPoint(47, 59, 1200, {.maxSpeed = 70, .minSpeed = 20});
+    move_arm_to(25, 800);
 
-    // chassis.moveToPoint(0, 49.6, 1500, {.forwards = false, .maxSpeed = 60}, false);
-    // chassis.turnToHeading(-90, 800, {.maxSpeed = 80}, false);
+    // ring 1
+    chassis.moveToPoint(0.5, 40, 1500, {.forwards = false, .maxSpeed = 80}, false);
+    chassis.turnToPoint(0, 64, 700, {.maxSpeed = 75}, false);
+    chassis.moveToPoint(0, 64, 1000, {.maxSpeed = 75}, false);
+    score_high_stake({0, 64, 0});
+    chassis.moveToPoint(0, 50, 800, {.forwards = false, .maxSpeed = 70}, false);
 
-    // // intake the 3 collinear rings
-    // //intake.move_velocity(300);
-    // chassis.moveToPoint(-48, 48, 1250, {.maxSpeed = 43, .minSpeed = 27}, false);
-    // //intake.move_velocity(400);
-    // chassis.moveToPoint(-59, 48,1000, {.maxSpeed = 42, .minSpeed = 10}, false);
-    // pros::delay(400);  // wait to intake ring
-    // //intake.move_velocity(340);
+    // ring 2
+    move_arm_to(20, 1000);
+    pros::delay(1200);
+    intake.move_velocity(370);
+    chassis.moveToPoint(0, 64, 1000, {.maxSpeed = 75}, false);
+    score_high_stake({0, 64});
+    chassis.moveToPoint(0, 48, 1000, {.forwards = false, .maxSpeed = 70}, false);
+    move_arm_to(0, 2000);
 
-    // chassis.moveToPoint(-44, 64, 1200, {.maxSpeed = 65}, false);
-    // pros::delay(200);  // wait to intake ring
+    // intake the 3 collinear rings
+    intake.move_velocity(370);
+    chassis.turnToPoint(-48, 48, 800, {.maxSpeed = 100}, false);
+    chassis.turnToPoint(-48, 48, 1000, {.maxSpeed = 80, .minSpeed = 70}, false);
+    intake.move_velocity(475);
+    chassis.moveToPoint(-59, 48, 1750, {.maxSpeed = 70, .minSpeed = 10}, false);
 
-    // // put goal into corner
-    // chassis.turnToPoint(-58, 65, 600, {.forwards = false, .maxSpeed = 95}, false);
-    // chassis.moveToPoint(-58, 65, 1100, {.forwards = false, .maxSpeed = 70}, false);
+    intake.move_velocity(350);
+    chassis.moveToPoint(-44, 64, 1200, {.maxSpeed = 65}, false);
+    pros::delay(200);  // wait to intake ring
+
+    // put goal into corner
+    chassis.turnToPoint(-58, 65, 600, {.forwards = false, .maxSpeed = 95}, false);
+    chassis.moveToPoint(-58, 65, 1100, {.forwards = false, .maxSpeed = 70}, false);
+    intake.brake();
+    toggle_clamp();
+    //toggle_clamp();  // release goal
+
+
+    // move to the other side of the field and clamp the goal
+    chassis.moveToPoint(-48, 48, 1000 ,{.maxSpeed = 90}, false);
+    chassis.turnToHeading(0, 1500, {.maxSpeed = 90, .minSpeed = 20}, false);
+    chassis.moveToPoint(-48, 0, 1500, {.forwards = false, .minSpeed = 60, .earlyExitRange = 5,}, false);
+    chassis.moveToPoint(-48, -25, 1500, {.forwards = false, .maxSpeed = 55}, false);
+    toggle_clamp();
+    pros::lcd::print(5, "left: %i | right: %i", left_motors.get_temperature(), right_motors.get_temperature());
+    pros::lcd::print(5, "arm: %i | intake: %i", arm.get_temperature(), intake.get_temperature());
     
-    // pros::delay(100);
-    // clamp.toggle();
-    // intake.brake();
-    // pros::delay(100);
-
     
-    // chassis.moveToPoint(-47, 47, 1000 ,{.maxSpeed = 90}, false);
-    // chassis.turnToHeading(0, 1500, {.maxSpeed = 90, .minSpeed = 20}, false);
-
-    // chassis.moveToPoint(-47, 0, 1500, {.forwards = false, .minSpeed = 60, .earlyExitRange = 5,}, false);
-    // chassis.moveToPoint(-47, -25, 1500, {.forwards = false, .maxSpeed = 55}, false);
+    //clamp.toggle();
     
-    // clamp.toggle();
-    // pros::delay(100);
+   
+
 
     // // intake 2 rings, moving into position to intake the rest
     // intake.move_velocity(350);

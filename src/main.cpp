@@ -35,7 +35,7 @@ void initialize() {
             pros::lcd::print(1, "Y: %f", chassis.getPose().y); // y
             pros::lcd::print(2, "Theta: %f", chassis.getPose().theta); // heading
             pros::lcd::print(3, "imu: %f", imu.get_heading());
-            pros::lcd::print(4, "%f", arm_encoder.get_position() / 100.0);
+            pros::lcd::print(4, "arm: %f", arm_encoder.get_position() / 100.0);
             // delay to save resources
             pros::delay(10);
         }
@@ -63,6 +63,6 @@ void opcontrol() {
 }
 
 void autonomous() {
-    arm_test();
+    skills();
 }
 
