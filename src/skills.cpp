@@ -53,20 +53,20 @@ void skills() {
     
     // load this ring onto the arm
     intake.move_velocity(370);
-    chassis.turnToPoint(47, 59, 800);
+    chassis.turnToPoint(47, 59, 600, {.maxSpeed = 127, .minSpeed = 40});  // ! check the min speed
     chassis.moveToPoint(47, 59, 1200, {.maxSpeed = 70, .minSpeed = 20});
     move_arm_to(25, 800);
 
     // score ring 1 on high stake
     chassis.moveToPoint(0.5, 40, 1500, {.forwards = false, .maxSpeed = 80}, false);
-    chassis.turnToPoint(0, 64, 700, {.maxSpeed = 75}, false);
-    chassis.moveToPoint(0, 64, 1000, {.maxSpeed = 75}, false);
+    chassis.turnToPoint(0, 64, 600, {.maxSpeed = 75}, false);
+    chassis.moveToPoint(0, 64, 900, {.maxSpeed = 75}, false);
     score_high_stake({0, 64, 0});
-    chassis.moveToPoint(0, 50, 800, {.forwards = false, .maxSpeed = 70}, false);
+    chassis.moveToPoint(0, 52, 600, {.forwards = false, .maxSpeed = 70}, false);
 
     // ring 2
     move_arm_to(20, 1000);
-    pros::delay(1200);
+    pros::delay(1000);
     intake.move_velocity(365);
     chassis.moveToPoint(0, 64, 1000, {.maxSpeed = 75}, false);
     score_high_stake({0, 64});
@@ -216,27 +216,4 @@ void skills() {
     // chassis.moveToPoint(0, 0, 1500, {.forwards = false, .maxSpeed = 65}, false);
     // move_arm_to(0, 1500);
     // arm.brake();
-    
-}
-
-void arm_test() {
-    chassis.setPose(0, -36, 180);
-    move_arm_to(20, 1000);
-    intake.move_velocity(370);
-    chassis.moveToPoint(0, -65.5, 1000, {.maxSpeed = 75}, false);
-    intake.move_velocity(-10);
-    intake.move_velocity(0);
-    move_arm_to(170, 2000);
-    chassis.moveToPoint(0, -65.5, 1000, {.maxSpeed = 75}, false);
-    chassis.moveToPoint(0, -48, 1000, {.forwards = false, .maxSpeed = 70,}, false);
-
-    move_arm_to(20, 1000);
-    pros::delay(1000);
-    intake.move_velocity(370);
-    chassis.moveToPoint(0, -66, 1000, {.maxSpeed = 75}, false);
-    intake.move_velocity(-10);
-    intake.move_velocity(0);
-    move_arm_to(170, 2000);
-    chassis.moveToPoint(0, -65.5, 1200, {.maxSpeed = 75}, false);
-    chassis.moveToPoint(0, -48, 1000, {.forwards = false, .maxSpeed = 70,}, false);
 }
