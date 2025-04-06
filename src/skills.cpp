@@ -3,6 +3,8 @@
 #include "pros/llemu.hpp"
 #include "pros/rtos.hpp"
 
+asset(one_txt);
+
 /**
  * @brief Util function to toggle the state of the clamp; use to both clamp and release goals 
  */
@@ -20,10 +22,10 @@ void toggle_clamp() {
  */
 void score_high_stake(lemlib::Pose stake_pos) {
     auto [x, y, _] = stake_pos;
-    intake.move_velocity(-80);
+    intake.move_velocity(-70);
     chassis.turnToPoint(x, y, 500, {.maxSpeed = 75}, false);
     intake.brake();
-    move_arm_to(135, 2000);
+    move_arm_to(140, 2000);
     chassis.moveToPoint(x, y, 800, {.maxSpeed = 75}, false);
 }
 
@@ -49,7 +51,7 @@ void skills() {
     
     // load this ring onto the arm
     intake.move_velocity(330);
-    chassis.moveToPose(25, 47, 72, 2000, {.maxSpeed = 90, .minSpeed = 55});
+    chassis.moveToPose(25, 47, 72, 2200, {.maxSpeed = 90, .minSpeed = 55});
     pros::delay(1200);
     move_arm_to(22, 800);
 
@@ -60,7 +62,7 @@ void skills() {
     chassis.moveToPoint(0, 64, 900, {.maxSpeed = 75}, false);
     score_high_stake({0, 64, 0});
     chassis.moveToPoint(0, 48, 600, {.forwards = false, .maxSpeed = 70});
-    move_arm_to(0, 2000);
+    move_arm_to(0, 4000);
 
     // intake the 3 collinear rings
     intake.move_velocity(400);
@@ -81,13 +83,14 @@ void skills() {
 
     // TODO: Tune
     // move across the field and load ring into arm
-    chassis.moveToPoint(24, 50, 1500, {.minSpeed = 90}, false);
+    chassis.moveToPoint(-48, 48, 1200, {.minSpeed = 60});
+    chassis.moveToPoint(23, 48, 3000, {.minSpeed = 70});
     move_arm_to(21, 800);
     intake.move_velocity(300);
-    chassis.moveToPoint(48, 48, 1000, {.maxSpeed = 50}, false);
-    
+    chassis.moveToPoint(48, 48, 1000, {.maxSpeed = 40}, false);
+    return;
     // grab mobile goal
-    chassis.moveToPoint(60, 24, 1500, {.forwards = false, .maxSpeed = 55}, false);
+    chassis.follow(one_txt, 8, 1700, false, false);
     intake.brake();
     toggle_clamp();
     
@@ -95,6 +98,8 @@ void skills() {
     chassis.turnToPoint(66, 60, 600, {.forwards = false, .maxSpeed = 90}, false);
     chassis.moveToPoint(66, 60, 1000, {.forwards = false, .maxSpeed = 70}, false);
     toggle_clamp();
+
+    return;
 
     // move to middle goal
     chassis.moveToPoint(60, 24, 1500, {.maxSpeed = 70}, false);
@@ -127,7 +132,7 @@ void skills() {
 
     // grab goal
     chassis.turnToPoint(-49, 24, 700, {.forwards = false}, false);
-    chassis.moveToPoint(-49, 24, 1000, {.forwards = false, .maxSpeed = 70, .minSpeed = 5}, false);
+    chassis.moveToPoint(-49, 24, 1300, {.forwards = false, .maxSpeed = 70, .minSpeed = 5}, false);
     toggle_clamp();
 
     chassis.moveToPoint(-0.5, -44, 2000, {.maxSpeed = 80}, false);
