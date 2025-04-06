@@ -20,7 +20,7 @@ void toggle_clamp() {
  */
 void score_high_stake(lemlib::Pose stake_pos) {
     auto [x, y, _] = stake_pos;
-    intake.move_velocity(-100);
+    intake.move_velocity(-80);
     chassis.turnToPoint(x, y, 500, {.maxSpeed = 75}, false);
     intake.brake();
     move_arm_to(135, 2000);
@@ -38,9 +38,9 @@ void skills() {
     intake.brake();
 
     // move forward and turn towards goal on left side of the robot (viewed from red side)
-    chassis.moveToPoint(-48, 0, 800);
-    chassis.turnToPoint(-47, 24, 700, {.forwards = false}, false);
-    chassis.moveToPoint(-47, 24, 1000, {.forwards = false, .maxSpeed = 70, .minSpeed = 5}, false);
+    chassis.moveToPoint(-49, 0, 800);
+    chassis.turnToPoint(-49, 24, 700, {.forwards = false}, false);
+    chassis.moveToPoint(-49, 24, 1000, {.forwards = false, .maxSpeed = 70, .minSpeed = 5}, false);
     toggle_clamp();
 
     // intake the first ring
@@ -48,7 +48,7 @@ void skills() {
     chassis.moveToPoint(-23.5, 23.5, 800, {.maxSpeed = 70}, false);
     
     // load this ring onto the arm
-    intake.move_velocity(350);
+    intake.move_velocity(330);
     chassis.moveToPose(25, 47, 72, 2000, {.maxSpeed = 90, .minSpeed = 55});
     pros::delay(1200);
     move_arm_to(20, 800);
@@ -59,8 +59,8 @@ void skills() {
     chassis.turnToPoint(0, 64, 600, {.maxSpeed = 75}, false);
     chassis.moveToPoint(0, 64, 900, {.maxSpeed = 75}, false);
     score_high_stake({0, 64, 0});
+    chassis.moveToPoint(0, 48, 600, {.forwards = false, .maxSpeed = 70});
     move_arm_to(0, 2000);
-    chassis.moveToPoint(0, 48, 600, {.forwards = false, .maxSpeed = 70}, false);
 
     // intake the 3 collinear rings
     intake.move_velocity(400);
@@ -80,9 +80,26 @@ void skills() {
     toggle_clamp();
 
 
+    // TODO: Tune
+    // move across the field and load ring into arm
+    chassis.moveToPoint(24, 50, 1500, {.minSpeed = 90}, false);
+    move_arm_to(21, 800);
+    intake.move_velocity(300);
+    chassis.moveToPoint(48, 48, 1000, {.maxSpeed = 50}, false);
     
+    // grab mobile goal
+    chassis.moveToPoint(60, 24, 1500, {.forwards = false, .maxSpeed = 55}, false);
+    intake.brake();
+    toggle_clamp();
+    
+    // put goal into corner
+    chassis.turnToPoint(66, 60, 600, {.forwards = false, .maxSpeed = 90}, false);
+    chassis.moveToPoint(66, 60, 1000, {.forwards = false, .maxSpeed = 70}, false);
+    toggle_clamp();
 
-
+    // move to middle goal
+    chassis.moveToPoint(60, 24, 1500, {.maxSpeed = 70}, false);
+    chassis.turnToPoint(48, 0, 800, {.maxSpeed = 90}, false);
 
     pros::lcd::print(5, "left: %i | right: %i", left_motors.get_temperature(), right_motors.get_temperature());
     pros::lcd::print(5, "arm: %i | intake: %i", arm.get_temperature(), intake.get_temperature());
