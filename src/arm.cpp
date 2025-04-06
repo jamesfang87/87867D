@@ -1,19 +1,20 @@
 #include "arm.h"
+#include <cmath>
 
 /**
  * @brief Moves the arm to a specified position (target)
  * 
- * @param target The position to move the arm to
+ * @param target The position (in degrees) to move the arm to
  * @param time_limit The maximum time the motion can take before exiting
  */
-void move_arm_to(float target, int time_limit = 2000) {
+void move_arm_to(float target, int time_limit) {
     pros::Task task([=]() {
         lemlib::PID arm_pid(3.5, 0, 8, 12, true);
         int time = 0;
 
         float error = target - arm_encoder.get_position() / 100.0;
         while (fabs(error) > 0.1 && time < time_limit) {
-            float output = arm_pid.update(error) + 40 * (target == 170.0);  // scuffed min speed
+            float output = arm_pid.update(error);
             arm.move_velocity(output);
             error = target - arm_encoder.get_position() / 100.0;
             time += 10;
