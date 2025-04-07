@@ -1,6 +1,5 @@
 // STD library imports 
 #include <cstdio>
-#include <vector>
 
 // Lemlib/Pros includes
 #include "main.h"
@@ -36,7 +35,7 @@ void initialize() {
             pros::lcd::print(1, "Y: %f", chassis.getPose().y); // y
             pros::lcd::print(2, "Theta: %f", chassis.getPose().theta); // heading
             pros::lcd::print(3, "horizontal: %f", horizontal_tracking_wheel.getDistanceTraveled());
-            pros::lcd::print(4, "arm: %f", vertical_tracking_wheel.getDistanceTraveled());
+            pros::lcd::print(4, "vertical: %f", vertical_tracking_wheel.getDistanceTraveled());
             // delay to save resources
             pros::delay(10);
         }
