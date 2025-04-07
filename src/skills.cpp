@@ -22,7 +22,7 @@ void toggle_clamp() {
  */
 void score_high_stake(lemlib::Pose stake_pos) {
     auto [x, y, _] = stake_pos;
-    intake.move_velocity(-70);
+    intake.move_velocity(-50);
     chassis.turnToPoint(x, y, 500, {.maxSpeed = 75}, false);
     intake.brake();
     move_arm_to(140, 2000);
@@ -46,11 +46,11 @@ void skills() {
     toggle_clamp();
 
     // intake the first ring
-    intake.move_velocity(355);
+    intake.move_velocity(450);
     chassis.moveToPoint(-23.5, 23.5, 800, {.maxSpeed = 70}, false);
     
     // load this ring onto the arm
-    intake.move_velocity(330);
+    intake.move_velocity(300);
     chassis.moveToPose(25, 47, 72, 2200, {.maxSpeed = 90, .minSpeed = 55});
     pros::delay(1200);
     move_arm_to(22, 800);
@@ -65,7 +65,7 @@ void skills() {
     move_arm_to(0, 4000);
 
     // intake the 3 collinear rings
-    intake.move_velocity(400);
+    intake.move_velocity(450);
     chassis.turnToPoint(-48, 48, 800, {.maxSpeed = 100}, false);
     chassis.moveToPoint(-48, 48, 1000, {.maxSpeed = 70, .minSpeed = 60}, false);
     intake.move_velocity(480);
@@ -83,12 +83,11 @@ void skills() {
 
     // TODO: Tune
     // move across the field and load ring into arm
-    chassis.moveToPoint(-48, 48, 1200, {.minSpeed = 60});
-    chassis.moveToPoint(23, 48, 3000, {.minSpeed = 70});
+    chassis.moveToPoint(48, 48, 3000, {.maxSpeed = 100});
+    pros::delay(2000);
     move_arm_to(21, 800);
     intake.move_velocity(300);
-    chassis.moveToPoint(48, 48, 1000, {.maxSpeed = 40}, false);
-    return;
+    
     // grab mobile goal
     chassis.follow(one_txt, 8, 1700, false, false);
     intake.brake();
@@ -151,3 +150,4 @@ void skills() {
     pros::lcd::print(5, "left: %u | right: %u", left_motors.get_temperature(), right_motors.get_temperature());
     pros::lcd::print(5, "arm: %u | intake: %u", arm.get_temperature(), intake.get_temperature());
 }
+

@@ -1,5 +1,6 @@
 // STD library imports 
 #include <cstdio>
+#include <vector>
 
 // Lemlib/Pros includes
 #include "main.h"
