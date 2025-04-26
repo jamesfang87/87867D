@@ -22,10 +22,10 @@ void toggle_clamp() {
 void score_high_stake(lemlib::Pose stake_pos) {
     auto [x, y, _] = stake_pos;
     intake.move_velocity(-10);
-    chassis.turnToPoint(x, y, 250, {.maxSpeed = 75}, false);
+    chassis.turnToPoint(x, y, 400, {.maxSpeed = 75}, false);
     intake.brake();
     move_arm_to(140, 2000);
-    chassis.moveToPoint(x, y, 250, {.maxSpeed = 75}, false);
+    chassis.moveToPoint(x, y, 300, {.maxSpeed = 75}, false);
 }
 
 void skills() {
@@ -55,12 +55,13 @@ void skills() {
     move_arm_to(22, 800);
 
     // score ring 1 on high stake
-    chassis.moveToPoint(0.5, -42, 1500, {.forwards = false, .maxSpeed = 80}, false);
+    chassis.moveToPoint(0, -42, 1500, {.forwards = false, .maxSpeed = 80}, false);
+    // TODO: tune ^
     intake.brake();
     chassis.turnToPoint(0, -64, 600, {.maxSpeed = 75}, false);
     chassis.moveToPoint(0, -64, 900, {.maxSpeed = 75}, false);
     score_high_stake({0, -64, 0});
-    chassis.moveToPoint(0, -48, 900, {.forwards = false, .maxSpeed = 70}, false);
+    chassis.moveToPoint(0, -48, 800, {.forwards = false, .maxSpeed = 80}, false);
     move_arm_to(0, 4000);
 
     // intake the 3 collinear rings
@@ -95,30 +96,30 @@ void skills() {
     chassis.moveToPoint(60, -55, 3000, {}, false);
 
     chassis.turnToHeading(240, 600);
+    
+    chassis.moveToPoint(60, -40, 600, {.maxSpeed = 60}); 
     chassis.turnToHeading(335, 1000);
+    
+    chassis.moveToPoint(58, -56, 800, {.forwards = false}, false);
     clamp.toggle();
 
-    
+    chassis.moveToPoint(47, 23.5, 1200, {.maxSpeed = 60}, false);
+    chassis.moveToPoint(47, 0, 1500, {.forwards = false, .maxSpeed = 50}, false);
+    toggle_clamp();
 
-    // chassis.turnToPoint(67, -61, 800, {.forwards = false}, false);
-    // chassis.moveToPoint(67, -61, 800, {.forwards = false, .minSpeed = 30}, false);
-    // clamp.toggle();
-    // sweeper.toggle();
+    // TODO:
+    // measure distance to alliance stake    
+    // 
 
-    // chassis.moveToPoint(47, 23.5, 1200, {.maxSpeed = 60}, false);
-    // chassis.moveToPoint(47, 0, 1500, {.forwards = false, .maxSpeed = 50}, false);
-    // toggle_clamp();
+    // chassis.turnToPoint(23.5, -23.5, 500);
+    // intake.move_velocity(450);
+    // chassis.moveToPoint(23.5, -23.5, 1200);
+    // chassis.turnToPoint(0, 0, 2000, {.maxSpeed = 60});
+    // intake.brake();
+    // chassis.moveToPoint(-23.5, 23.5, 4000);
+    // intake.move_velocity(450);
+    // chassis.moveToPoint(-47, 47, 2000);
 
-
-
-    
-
-
-
-
-
-
-    
 
 }
 
