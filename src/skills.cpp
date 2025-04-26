@@ -21,7 +21,7 @@ void toggle_clamp() {
  */
 void score_high_stake(lemlib::Pose stake_pos) {
     auto [x, y, _] = stake_pos;
-    intake.move_velocity(-10);
+    intake.move_velocity(-30);
     chassis.turnToPoint(x, y, 400, {.maxSpeed = 75}, false);
     intake.brake();
     move_arm_to(140, 2000);
@@ -29,6 +29,7 @@ void score_high_stake(lemlib::Pose stake_pos) {
 }
 
 void skills() {
+    // init settings
     chassis.setPose(-63, 0, 90);
     arm_encoder.set_position(0);
     arm.set_brake_mode_all(pros::E_MOTOR_BRAKE_HOLD);
@@ -51,15 +52,15 @@ void skills() {
     // load this ring onto the arm
     intake.move_velocity(250);
     chassis.moveToPose(27, -47, 108, 2400, {.maxSpeed = 100, .minSpeed = 70});
-    pros::delay(1200);
+    pros::delay(1400);
     move_arm_to(22, 800);
 
     // score ring 1 on high stake
-    chassis.moveToPoint(0, -42, 1500, {.forwards = false, .maxSpeed = 80}, false);
+    chassis.moveToPoint(0.5, -42, 1500, {.forwards = false, .maxSpeed = 85}, false);
     // TODO: tune ^
     intake.brake();
-    chassis.turnToPoint(0, -64, 600, {.maxSpeed = 75}, false);
-    chassis.moveToPoint(0, -64, 900, {.maxSpeed = 75}, false);
+    chassis.turnToPoint(0.5, -64, 600, {.maxSpeed = 75}, false);
+    chassis.moveToPoint(0.5, -64, 900, {.maxSpeed = 75}, false);
     score_high_stake({0, -64, 0});
     chassis.moveToPoint(0, -48, 800, {.forwards = false, .maxSpeed = 80}, false);
     move_arm_to(0, 4000);
@@ -80,37 +81,34 @@ void skills() {
     intake.brake();
     toggle_clamp();
     
-    chassis.moveToPoint(47, -47, 3000, {.maxSpeed = 90});
+    // move to other side and load ring at (47, 47) into arm
+    chassis.moveToPoint(49, -47, 3000, {.maxSpeed = 105, .minSpeed = 15});
     pros::delay(2000);
     intake.move_velocity(250);
     move_arm_to(22, 800);
 
-    chassis.moveToPose(63, -20, 233, 2000, {.forwards = false, .minSpeed = 40}, false);
+    // get goal and put into corner
+    chassis.moveToPose(63, -20, 233, 1500, {.forwards = false, .minSpeed = 60}, false);
     intake.brake();
     toggle_clamp();
-
-// 57, -52
-
-    sweeper.toggle();
-    chassis.turnToPoint(60, -55, 600, {}, false);
-    chassis.moveToPoint(60, -55, 3000, {}, false);
-
-    chassis.turnToHeading(240, 600);
-    
-    chassis.moveToPoint(60, -40, 600, {.maxSpeed = 60}); 
-    chassis.turnToHeading(335, 1000);
-    
-    chassis.moveToPoint(58, -56, 800, {.forwards = false}, false);
-    clamp.toggle();
-
-    chassis.moveToPoint(47, 23.5, 1200, {.maxSpeed = 60}, false);
-    chassis.moveToPoint(47, 0, 1500, {.forwards = false, .maxSpeed = 50}, false);
+    chassis.turnToPoint(59, -58, 600, {.forwards = false}, false);
+    chassis.moveToPoint(59, -58, 1600, {.forwards = false}, false);
     toggle_clamp();
 
-    // TODO:
-    // measure distance to alliance stake    
-    // 
+    // clamp goal at y = 0
+    chassis.moveToPoint(47, -23.5, 1500, {.maxSpeed = 70}, false);
+    chassis.turnToPoint(47, 0, 800, {.forwards = false});
+    chassis.moveToPoint(47, 0, 1300, {.forwards = false, .maxSpeed = 70}, false);
+    toggle_clamp();
 
+    // score onto alliance stake
+    chassis.turnToPoint(61, 0, 800, {}, false);
+    chassis.moveToPoint(61, 0, 2000, {.maxSpeed = 60}, false);
+    chassis.moveToPoint(61, 0, 1000);
+    move_arm_to(200, 1000);
+    chassis.moveToPoint(47, 0, 2000, {.forwards = false, .maxSpeed = 60});
+    move_arm_to(0, 1500);
+    // TODO: other corner, speed above part up, change movetopose to chained movetopoints on line 54
     // chassis.turnToPoint(23.5, -23.5, 500);
     // intake.move_velocity(450);
     // chassis.moveToPoint(23.5, -23.5, 1200);
