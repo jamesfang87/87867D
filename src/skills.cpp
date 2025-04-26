@@ -41,26 +41,26 @@ void skills() {
 
     // move forward and turn towards goal on left side of the robot (viewed from red side)
     chassis.moveToPoint(-49, 0, 700);
-    chassis.turnToPoint(-49, -25, 600, {.forwards = false}, false);
-    chassis.moveToPoint(-49, -25, 800, {.forwards = false, .maxSpeed = 70, .minSpeed = 5}, false);
+    chassis.turnToPoint(-49, -26, 600, {.forwards = false}, false);
+    chassis.moveToPoint(-49, -26, 800, {.forwards = false, .maxSpeed = 90, .minSpeed = 5}, false);
     toggle_clamp();
 
     // intake the first ring
-    intake.move_velocity(450);
-    chassis.moveToPoint(-23.5, -23.5, 800, {.maxSpeed = 90, .minSpeed = 90}, false);
+    intake.move_velocity(400);
+    chassis.turnToPoint(-23.5, -25, 600, {}, false);
+    chassis.moveToPoint(-23.5, -25, 600, {.maxSpeed = 90, .minSpeed = 70}, false);
     
     // load this ring onto the arm
-    intake.move_velocity(250);
-    chassis.moveToPose(27, -47, 108, 2400, {.maxSpeed = 100, .minSpeed = 70});
-    pros::delay(1400);
+    chassis.turnToPoint(23.5, -47, 400, {.maxSpeed= 90, .minSpeed = 75}, false);
+    chassis.moveToPoint(23.5, -47, 1400, {.maxSpeed = 90, .minSpeed = 55}, true);    
+    pros::delay(1000);
     move_arm_to(22, 800);
 
     // score ring 1 on high stake
-    chassis.moveToPoint(0.5, -42, 1500, {.forwards = false, .maxSpeed = 85}, false);
-    // TODO: tune ^
+    chassis.moveToPoint(0, -42, 1500, {.forwards = false, .maxSpeed = 80}, false);
     intake.brake();
-    chassis.turnToPoint(0.5, -64, 600, {.maxSpeed = 75}, false);
-    chassis.moveToPoint(0.5, -64, 900, {.maxSpeed = 75}, false);
+    chassis.turnToPoint(0, -64, 600, {.maxSpeed = 75}, false);
+    chassis.moveToPoint(0, -64, 900, {.maxSpeed = 75}, false);
     score_high_stake({0, -64, 0});
     chassis.moveToPoint(0, -48, 800, {.forwards = false, .maxSpeed = 80}, false);
     move_arm_to(0, 4000);
@@ -68,16 +68,16 @@ void skills() {
     // intake the 3 collinear rings
     intake.move_velocity(450);
     chassis.turnToPoint(-48, -48, 800, {.maxSpeed = 100}, false);
-    chassis.moveToPoint(-48, -48, 1000, {.maxSpeed = 70, .minSpeed = 60}, false);
+    chassis.moveToPoint(-48, -48, 1000, {.maxSpeed = 70, .minSpeed = 65}, false);
     intake.move_velocity(490);
-    chassis.moveToPoint(-59, -48, 1750, {.maxSpeed = 60, .minSpeed = 20}, false);
+    chassis.moveToPoint(-59, -48, 1750, {.maxSpeed = 65, .minSpeed = 40}, false);
 
     intake.move_velocity(350);
-    chassis.moveToPoint(-46, -60, 1200, {.maxSpeed = 65}, false);
+    chassis.moveToPoint(-45.5, -61, 1200, {.maxSpeed = 70}, false);
 
     // put goal into corner
     chassis.turnToPoint(-66, -66, 600, {.forwards = false, .maxSpeed = 95}, false);
-    chassis.moveToPoint(-66, -66, 1000, {.forwards = false, .maxSpeed = 70}, false);
+    chassis.moveToPoint(-66, -66, 800, {.forwards = false, .maxSpeed = 70}, false);
     intake.brake();
     toggle_clamp();
     
@@ -102,13 +102,13 @@ void skills() {
     toggle_clamp();
 
     // score onto alliance stake
-    chassis.turnToPoint(61, 0, 800, {}, false);
-    chassis.moveToPoint(61, 0, 2000, {.maxSpeed = 60}, false);
-    chassis.moveToPoint(61, 0, 1000);
+    chassis.turnToPoint(59, 0, 800, {}, false);
+    chassis.moveToPoint(59, 0, 2000, {.maxSpeed = 60}, false);
+    chassis.moveToPoint(59, 0, 1000);
     move_arm_to(200, 1000);
     chassis.moveToPoint(47, 0, 2000, {.forwards = false, .maxSpeed = 60});
     move_arm_to(0, 1500);
-    // TODO: other corner, speed above part up, change movetopose to chained movetopoints on line 54
+    // TODO: other corner, speed above part up,
     // chassis.turnToPoint(23.5, -23.5, 500);
     // intake.move_velocity(450);
     // chassis.moveToPoint(23.5, -23.5, 1200);
