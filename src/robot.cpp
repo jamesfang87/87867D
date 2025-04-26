@@ -20,8 +20,8 @@ pros::Rotation arm_encoder(18);
 
 pros::Imu imu(17);
 
-pros::Rotation horizontal_encoder(13);
-pros::Rotation vertical_encoder(5);
+pros::Rotation horizontal_encoder(5);
+pros::Rotation vertical_encoder(13);
 
 // horizontal tracking wheel
 lemlib::TrackingWheel horizontal_tracking_wheel(&horizontal_encoder, lemlib::Omniwheel::NEW_275, -4.75);
