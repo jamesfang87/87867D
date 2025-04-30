@@ -84,14 +84,14 @@ void skills() {
     toggle_clamp();
     
     // move to other side and load ring at (47, 47) into arm
-    chassis.moveToPoint(49, -47, 3000, {.maxSpeed = 105, .minSpeed = 35});
+    chassis.moveToPoint(49, -47, 3000, {.maxSpeed = 105, .minSpeed = 30});
     pros::delay(2000);
     intake.move_velocity(250);
     move_arm_to(22, 800);
 
     // get goal and put into corner
     chassis.moveToPoint(47, -47, 600, {.forwards = false, .minSpeed = 50}, false);
-    chassis.moveToPose(63, -21, 233, 1500, {.forwards = false, .minSpeed = 20}, false);
+    chassis.moveToPose(63, -21, 233, 1500, {.forwards = false, .minSpeed = 30}, false);
     intake.brake();
     toggle_clamp();
     chassis.turnToPoint(58, -58, 600, {.forwards = false}, false);
@@ -134,6 +134,7 @@ void part2() {
     arm_encoder.set_position(0);
     arm.set_brake_mode_all(pros::E_MOTOR_BRAKE_HOLD);
     toggle_clamp();
+    // ! Remove when merging
 
     intake.move_velocity(375);  // TODO: test do see if we need to increase rpm
     chassis.turnToPoint(23.5, -23.5, 500, {}, false);
