@@ -29,6 +29,7 @@ void blue_neg() {
     chassis.moveToPoint(48, 0,  2000, {.maxSpeed = 45}, false);
 }
 
+
 ASSET(redneg1_txt);
 void red_neg() {
     //alliance stake
@@ -47,7 +48,7 @@ void red_neg() {
     chassis.follow(redneg1_txt, 12, 2500, false, false);
     clamp.toggle();
     move_arm_to(0, 1500);
-    pros::delay(30);neg
+    pros::delay(30);
 
     //ring 1
     chassis.turnToPoint(-22, 45, 800, {.maxSpeed = 90}, false);
@@ -66,11 +67,6 @@ void red_neg() {
     intake.move_velocity(400);
     chassis.moveToPoint(-3, 46, 1000, {.forwards = true, .maxSpeed = 50}, false);
 
-
-    
-    
-
-
     
 }
 
@@ -82,7 +78,7 @@ void red_pos() {
     chassis.setPose(-55, -60, 90);
     chassis.follow(redpos1_txt, 12, 2000, true, true);
 
-    pros::delay(900);
+    pros::delay(1050);
 
     sweeper.toggle();
     // pros::delay(50); 
@@ -92,7 +88,7 @@ void red_pos() {
     pros::delay(30);
 
     chassis.turnToPoint(-70, -70, 800, {.maxSpeed = 90}, true);
-    chassis.moveToPoint(-15, -62, 1000, {.forwards = false, .maxSpeed = 60}, false);
+    chassis.moveToPoint(-15, -58, 1000, {.forwards = false, .maxSpeed = 60}, false);
     pros::delay(80);
     clamp.toggle();
     pros::delay(40);
