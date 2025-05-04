@@ -62,9 +62,9 @@ void opcontrol() {
 }
 
 void autonomous() {
-    skills();
+    // skills();
+    // red_pos(); 
     // red_neg();
-    // red_pos();
     // blue_neg();
     // blue_pos();
     // red_elim();
