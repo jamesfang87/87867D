@@ -103,21 +103,21 @@ void red_neg() {
     pros::delay(600);
 
     //mogo
-    //chassis.moveToPoint(-56.1, 16.7, 1000, {.forwards = false, .minSpeed = 50}, false);
-    //chassis.moveToPose(-23.5, 23.5, 300, 3000, {.forwards = false, .minSpeed = 5}, false);
     chassis.follow(redneg1_txt, 8, 2500, false, false);
     pros::delay(35);
     clamp.toggle();
     move_arm_to(0, 1500);
 
-    chassis.turnToPoint(-8, 38, 800, {.earlyExitRange = 1}, false);
-    chassis.moveToPoint(-8, 38, 700, {.maxSpeed = 70, .earlyExitRange = 0.1}, false);
 
+    // rings 1 and 2
+    chassis.turnToPoint(-8, 38, 700, {.earlyExitRange = 1}, false);
+    chassis.moveToPoint(-8, 38, 600, {.maxSpeed = 70}, false);
     intake.move_velocity(450);
-    chassis.turnToPoint(-9, 65, 600, {.maxSpeed = 60}, false);
-    chassis.moveToPoint(-10, 65, 1500, {.maxSpeed = 60, .earlyExitRange = 0.1}, false);
+    chassis.turnToPoint(-8, 65, 600, {.maxSpeed = 60}, false);
+    chassis.moveToPoint(-8, 65, 1500, {.maxSpeed = 60, .earlyExitRange = 0.1}, false);
 
-    
+    // ! did not upload yet
+    //chassis.moveToPoint(float x, float y, int timeout)
     // pros::delay(30);
 
     // // ring 1 and 2
