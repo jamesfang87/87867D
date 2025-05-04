@@ -1,4 +1,3 @@
-#include "main.h"
 #include "lemlib/api.hpp" // IWYU pragma: keep
 #include "pros/rotation.hpp"
 
@@ -19,9 +18,7 @@ extern pros::Imu imu;
 extern pros::Rotation horizontal_encoder;
 extern pros::Rotation vertical_encoder;
 
-// horizontal tracking wheel
 extern lemlib::TrackingWheel horizontal_tracking_wheel;
-// vertical tracking wheel
 extern lemlib::TrackingWheel vertical_tracking_wheel;
 
 extern lemlib::OdomSensors sensors;

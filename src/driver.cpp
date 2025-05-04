@@ -1,4 +1,5 @@
 #include "driver.h"
+#include "pros/misc.h"
 
 /**
  * Prints the temperatures of the left mg, right mg, and the intake motor
@@ -7,8 +8,7 @@
  * @return none
  */
 void output_temps() {
-    controller.print(0, 0, "l: %.0f r: %.0f", left_motors.get_temperature(), right_motors.get_temperature());
-    controller.print(1, 0, "i: %.0f a: %.0f", intake.get_temperature(), arm.get_temperature());
+    controller.print(0, 0, "i: %.0f a: %.0f", intake.get_temperature(), arm.get_temperature());
 }
 
 /**
@@ -39,7 +39,7 @@ void check_buttons() {
     }
 
     if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_X)) {
-        move_arm_to(20, 2000);
+        move_arm_to(22, 2000);
         arm.brake();
     }
 }
@@ -54,10 +54,10 @@ void check_buttons() {
  * @return none
  */
 void check_intake() {
-    if (controller.get_digital(DIGITAL_R1)) {
-        intake.move_velocity(900);
-    } else if (controller.get_digital(DIGITAL_R2)) {
-        intake.move_velocity(-900);
+    if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) {
+        intake.move_velocity(500);
+    } else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) {
+        intake.move_velocity(-500);
     } else {
         intake.move_voltage(0);
     }
@@ -73,9 +73,9 @@ void check_intake() {
  * @return none
  */
 void check_arm() {
-    if (controller.get_digital(DIGITAL_L1)) {
+    if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
         move_arm_up();
-    } else if (controller.get_digital(DIGITAL_L2)) {
+    } else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) {
         move_arm_down();
     } else {
         stop_arm();
