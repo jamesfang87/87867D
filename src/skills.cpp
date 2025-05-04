@@ -99,17 +99,18 @@ void skills() {
 
     // clamp goal at y = 0
     chassis.moveToPoint(47, -23.5, 1500, {.maxSpeed = 70}, false);
-    chassis.turnToPoint(47, 2, 800, {.forwards = false});
-    chassis.moveToPoint(47, 2, 1300, {.forwards = false, .maxSpeed = 70}, false);
+    chassis.turnToPoint(47, 0, 800, {.forwards = false});
+    chassis.moveToPoint(47, 0, 1300, {.forwards = false, .maxSpeed = 70}, false);
     toggle_clamp();
 
     // score onto alliance stake
     chassis.turnToHeading(90, 1000, {}, false);
     chassis.moveToPoint(72, chassis.getPose().y, 2000, {.maxSpeed = 60}, false);
     pros::delay(300);
-    chassis.setPose(68, 0, chassis.getPose().theta);
+    chassis.setPose(63, 0, chassis.getPose().theta);
     chassis.moveToPoint(58, 0, 1000, {.forwards = false, .maxSpeed = 60}, false);
     move_arm_to(220, 1000);
+    pros::delay(800);
     chassis.moveToPoint(47, 0, 2000, {.forwards = false, .maxSpeed = 60});
     move_arm_to(0, 1500);
 
