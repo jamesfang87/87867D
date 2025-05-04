@@ -55,9 +55,9 @@ void check_buttons() {
  */
 void check_intake() {
     if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) {
-        intake.move_velocity(400);
+        intake.move_velocity(500);
     } else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) {
-        intake.move_velocity(-400);
+        intake.move_velocity(-500);
     } else {
         intake.move_voltage(0);
     }
