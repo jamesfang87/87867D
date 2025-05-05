@@ -54,15 +54,15 @@ void skills() {
 
     // intake the first ring
     chassis.turnToPoint(-23.5, -26.3, 600, {}, false);
-    intake.move_velocity(403);
+    intake.move_velocity(405);
     chassis.moveToPoint(-23.5, -26.3, 600, {.maxSpeed = 85, .minSpeed = 65}, false);
     
     // load this ring onto the arm
-    chassis.turnToPoint(24, -48, 800, {.maxSpeed = 85, .minSpeed = 70}, false);
-    chassis.moveToPoint(24, -48, 1400, {.maxSpeed = 85, .minSpeed = 40}, true);
+    chassis.turnToPoint(24, -48, 800, {.maxSpeed = 90, .minSpeed = 70}, false);
+    chassis.moveToPoint(24, -48, 1500, {.maxSpeed = 90, .minSpeed = 40}, true);
     pros::delay(1200);
     move_arm_to(21, 800);
-    intake.move_velocity(490);
+    intake.move_velocity(500);
 
     // score ring 1 on high stake
     chassis.moveToPoint(-1.7, -42, 1800, {.forwards = false, .maxSpeed = 80}, false);
@@ -74,18 +74,19 @@ void skills() {
     score_high_stake({-1.7, -64, 0});
     chassis.setPose(0, -61, chassis.getPose().theta);
     intake_lift.toggle();
-    intake.move_velocity(440);
+    intake.move_velocity(400);
     chassis.moveToPoint(0, -48, 800, {.forwards = false, .maxSpeed = 75}, false);
     move_arm_to(70, 4000);
 
     // intake the 3 collinear rings
-    intake.move_velocity(380);
-    chassis.turnToPoint(-48, -48, 800, {.maxSpeed = 95}, false);
-    chassis.moveToPoint(-48, -48, 1000, {.maxSpeed = 65, .minSpeed = 40}, false);
-    intake.move_velocity(395);
-    chassis.moveToPoint(-59, -48, 1500, {.maxSpeed = 40, .minSpeed = 10}, false);
-    intake.move_velocity(325);
-    chassis.moveToPoint(-41, -61, 1200, {.maxSpeed = 72}, false);
+    intake.move_velocity(400);
+    chassis.turnToPoint(-48, -48, 800, {.maxSpeed = 100}, false);
+    chassis.moveToPoint(-48, -48, 1000, {.maxSpeed = 70, .minSpeed = 40}, false);
+    intake.move_velocity(520);
+    chassis.moveToPoint(-59, -48, 1750, {.maxSpeed = 40, .minSpeed = 10}, false);
+    intake.move_velocity(375);
+    chassis.moveToPoint(-45.5, -61, 1200, {.maxSpeed = 70}, false);
+
 
     // put goal into corner
     chassis.turnToPoint(-66, -66, 600, {.forwards = false, .maxSpeed = 90}, false);
@@ -110,14 +111,14 @@ void skills() {
 
     // clamp goal at y = 0
     chassis.moveToPoint(47, -23.5, 1500, {.maxSpeed = 65}, false);
-    chassis.turnToPoint(47, 0, 800, {.forwards = false});
-    chassis.moveToPoint(47, 0, 1300, {.forwards = false, .maxSpeed = 65}, false);
+    chassis.turnToPoint(47, 1.5, 800, {.forwards = false});
+    chassis.moveToPoint(47, 1.5, 1300, {.forwards = false, .maxSpeed = 65}, false);
     toggle_clamp();
 
     // score onto alliance stake
     chassis.turnToPoint(64, chassis.getPose().y, 1200, {.maxSpeed = 75}, false);
     intake_lift.toggle();
-    chassis.moveToPoint(64, chassis.getPose().y, 1200, {.maxSpeed = 60}, false);
+    chassis.moveToPoint(67, chassis.getPose().y, 1200, {.maxSpeed = 60}, false);
     pros::delay(300);
     chassis.setPose(61, 0, 90);
     chassis.moveToPoint(54, 0, 1000, {.forwards = false, .maxSpeed = 65}, false);
