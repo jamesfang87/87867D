@@ -35,6 +35,8 @@ void initialize() {
             pros::lcd::print(2, "Theta: %f", chassis.getPose().theta); // heading
             pros::lcd::print(3, "horizontal: %f", horizontal_tracking_wheel.getDistanceTraveled());
             pros::lcd::print(4, "vertical: %f", vertical_tracking_wheel.getDistanceTraveled());
+            
+            std::cout << chassis.getPose().theta << '\n';
             // delay to save resources
             pros::delay(10);
         }
@@ -62,6 +64,7 @@ void opcontrol() {
 }
 
 void autonomous() {
+    // no_intake();
     skills();
     // red_neg();
     // red_pos();

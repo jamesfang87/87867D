@@ -18,7 +18,7 @@ pros::Motor intake(4, pros::MotorGearset::blue);
 pros::MotorGroup arm({11, -19}, pros::MotorGearset::green);
 pros::Rotation arm_encoder(18);
 
-pros::Imu imu(17);
+pros::Imu imu(20);
 
 pros::Rotation horizontal_encoder(5);
 pros::Rotation vertical_encoder(13);
