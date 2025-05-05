@@ -49,48 +49,47 @@ void skills() {
     // move forward and turn towards goal on left side of the robot (viewed from red side)
     chassis.moveToPoint(-49, 0, 700);
     chassis.turnToPoint(-49, -25, 600, {.forwards = false}, false);
-    chassis.moveToPoint(-49, -25, 800, {.forwards = false, .maxSpeed = 70}, false);
+    chassis.moveToPoint(-49, -25, 800, {.forwards = false, .maxSpeed = 60}, false);
     toggle_clamp();
 
     // intake the first ring
-    chassis.turnToPoint(-23.5, -26.3, 600, {}, false);
+    chassis.turnToPoint(-23.5, -25.7, 600, {}, false);
     intake.move_velocity(405);
-    chassis.moveToPoint(-23.5, -26.3, 600, {.maxSpeed = 85, .minSpeed = 65}, false);
+    chassis.moveToPoint(-23.5, -25.7, 600, {.maxSpeed = 90, .minSpeed = 65}, false);
     
     // load this ring onto the arm
-    chassis.turnToPoint(24, -48, 800, {.maxSpeed = 90, .minSpeed = 70}, false);
-    chassis.moveToPoint(24, -48, 1500, {.maxSpeed = 90, .minSpeed = 40}, true);
+    chassis.turnToPoint(24, -48, 800, {.maxSpeed = 80, .minSpeed = 70}, false);
+    chassis.moveToPoint(24, -48, 1500, {.maxSpeed = 80, .minSpeed = 40}, true);
     pros::delay(1200);
     move_arm_to(21, 800);
     intake.move_velocity(500);
 
     // score ring 1 on high stake
-    chassis.moveToPoint(-1.7, -42, 1800, {.forwards = false, .maxSpeed = 80}, false);
+    chassis.moveToPoint(-1.7, -42, 1500, {.forwards = false, .maxSpeed = 80}, false);
     intake.move_velocity(240);
     move_arm_to(60, 2000);
     intake_lift.toggle();
-    chassis.turnToPoint(-1.7, -64, 700, {.maxSpeed = 70}, false);
+    chassis.turnToPoint(-1.7, -64, 700, {.maxSpeed = 90}, false);
     chassis.moveToPoint(-1.7, -64, 1000, {.maxSpeed = 65, .minSpeed = 5}, false);
     score_high_stake({-1.7, -64, 0});
     chassis.setPose(0, -61, chassis.getPose().theta);
     intake_lift.toggle();
-    intake.move_velocity(400);
+    intake.move_velocity(420);
     chassis.moveToPoint(0, -48, 800, {.forwards = false, .maxSpeed = 75}, false);
     move_arm_to(70, 4000);
 
     // intake the 3 collinear rings
     intake.move_velocity(400);
     chassis.turnToPoint(-48, -48, 800, {.maxSpeed = 100}, false);
-    chassis.moveToPoint(-48, -48, 1000, {.maxSpeed = 70, .minSpeed = 40}, false);
-    intake.move_velocity(520);
-    chassis.moveToPoint(-59, -48, 1750, {.maxSpeed = 40, .minSpeed = 10}, false);
+    chassis.moveToPoint(-48, -48, 1000, {.maxSpeed = 70, .minSpeed = 60}, false);
+    intake.move_velocity(600);
+    chassis.moveToPoint(-59, -48, 1750, {.maxSpeed = 60, .minSpeed = 40}, false);
     intake.move_velocity(375);
     chassis.moveToPoint(-45.5, -61, 1200, {.maxSpeed = 70}, false);
 
-
     // put goal into corner
     chassis.turnToPoint(-66, -66, 600, {.forwards = false, .maxSpeed = 90}, false);
-    chassis.moveToPoint(-66, -66, 800, {.forwards = false, .maxSpeed = 65}, false);
+    chassis.moveToPoint(-66, -66, 800, {.forwards = false, .maxSpeed = 70}, false);
     intake.brake();
     toggle_clamp();
 
