@@ -1,90 +1,70 @@
 #include "auton.h"
+#include "lemlib/chassis/chassis.hpp"
 #include "pros/rtos.hpp"
 
 
 ASSET(blueneg1_txt);
 void blue_neg() {
-    chassis.setPose(63, 12, 90);
-    chassis.follow(blueneg1_txt, 12, 2500, false, false);
-    clamp.toggle();
-
-    intake.move_velocity(350);
-    pros::delay(1000);
     
-    intake.move_velocity(400);
-    chassis.turnToPoint(9.7, 37, 800, {.maxSpeed = 90}, false);
-    chassis.moveToPoint(9.7, 37, 1400, {.maxSpeed = 65}, false);
-
-    intake.move_velocity(350);
-    chassis.turnToPoint(8.5, 47, 800, {.maxSpeed = 90}, false);
-    chassis.moveToPoint(8.5, 47, 1400, {.maxSpeed = 65}, false);
-
-    chassis.moveToPoint(11, 30, 2000, {. forwards = false, .maxSpeed = 70}, false);
-    intake.move_velocity(350);
-    chassis.moveToPoint(25, 48, 2000, {.maxSpeed = 70, .minSpeed = 30}, false);
-    pros::delay(1000);
-    intake_lift.toggle();
-
-    chassis.moveToPoint(35.5, 23.5, 2000, {.maxSpeed = 70, .minSpeed = 20}, false);
-    chassis.moveToPoint(48, 0,  2000, {.maxSpeed = 45}, false);
 }
 
 
 ASSET(bluepos1_txt);
+ASSET(bluepos2_txt);
 void blue_pos() {
     //center goal rush
     chassis.setPose(55, -60, 90);
-    // chassis.follow(bluepos1_txt, 12, 2000, true, true);
-    chassis.moveToPoint(7, -60, 1000, {.forwards = false, .maxSpeed = 80}, false);
-
-    pros::delay(1050);
-
+    chassis.follow(bluepos1_txt, 12, 1000, true, true);
+    //2.46 - 1.56 = 0.9
+    pros::delay(950);
+    left_motors.brake();
+    right_motors.brake();
     sweeper.toggle();
-    // pros::delay(50); 
 
+    // pull the mogo back
     chassis.moveToPoint(35, -60, 1000, {.forwards = false, .maxSpeed = 80}, false);
     sweeper.toggle();
     pros::delay(30);
 
-    chassis.turnToPoint(70, -70, 800, {.maxSpeed = 90}, true);
-    chassis.moveToPoint(15, -58, 1000, {.forwards = false, .maxSpeed = 60}, false);
+    // grab goal
+    chassis.turnToPoint(70, -60, 800, {}, true);
+    chassis.moveToPoint(12, -55, 1000, {.forwards = false, .maxSpeed = 70}, false);
     pros::delay(80);
     clamp.toggle();
     pros::delay(40);
     
+    // intake preload ring
     intake.move_velocity(400);
-    pros::delay(100);
+    // pros::delay(100);
 
-    // //grab other ring 
-    // chassis.turnToPoint(24, -48, 800, {.maxSpeed = 90}, true);
-    // intake.move_velocity(280);
-    // pros::delay(20);
-    // chassis.moveToPoint(25.5, -41.5, 1000, {.forwards = true, .maxSpeed = 50}, false);
-    // intake.brake();
-    // // chassis.moveToPoint(-24, -46, 900, {.forwards = false, .maxSpeed = 70}, false);
 
-    // // drop the goal
-    // chassis.moveToPoint(50, -60, 1500, {.forwards = false, .maxSpeed = 70}, false);
-    // clamp.toggle();
+    //grab other ring 
+    chassis.turnToPoint(24, -48, 800, {.maxSpeed = 90}, true);
+    intake.move_velocity(280);
+    pros::delay(20);
+    chassis.moveToPoint(25.5, -41.5, 1000, {.forwards = true, .maxSpeed = 50}, false);
+    intake.brake();
+
+    // drop the goal
+    chassis.moveToPoint(50, -60, 1500, {.forwards = false, .maxSpeed = 70}, false);
+    clamp.toggle();
     
-    // //grab second goal
-    // chassis.turnToPoint(70, -70, 800, {.maxSpeed = 90}, true);
-    // // chassis.follow(bluepos2_txt, 12, 2200, false, false);
-    // pros::delay(20);
-    // clamp.toggle();
-    // pros::delay(20);
-    // intake.move_velocity(400);
-    // pros::delay(700);
-    // intake.brake();
+    //grab second goal
+    chassis.turnToPoint(70, -70, 800, {.maxSpeed = 90}, true);
+    chassis.follow(bluepos2_txt, 12, 2200, false, false);
+    pros::delay(20);
+    clamp.toggle();
+    pros::delay(20);
+    intake.move_velocity(400);
+    pros::delay(700);
+    intake.brake();
     // clamp.toggle();
 
-    // //hang
-    // move_arm_to(300, 1500);
-    // arm.brake();
-    // chassis.turnToPoint(0, 0, 800, {.forwards = false, .maxSpeed = 90}, false);
-    // chassis.moveToPoint(7, -7, 1200, {.forwards = false, .maxSpeed = 62}, false);
-    // move_arm_to(0, 1500);
-    // arm.brake(); 
+    // touch ladder
+    chassis.turnToPoint(22, -12, 800, {.forwards = true, .maxSpeed = 90}, false);
+    chassis.moveToPoint(22, -12, 1200, {.forwards = true, .maxSpeed = 62}, false);
+    move_arm_to(170, 1500);
+
 }
 
 
@@ -106,26 +86,39 @@ void red_neg() {
     //chassis.moveToPoint(-56.1, 16.7, 1000, {.forwards = false, .minSpeed = 50}, false);
     //chassis.moveToPose(-23.5, 23.5, 300, 3000, {.forwards = false, .minSpeed = 5}, false);
     chassis.follow(redneg1_txt, 8, 2500, false, false);
-    pros::delay(35);
+    pros::delay(15);
     clamp.toggle();
     move_arm_to(0, 1500);
 
-    chassis.turnToPoint(-8, 38, 800, {.earlyExitRange = 1}, false);
-    chassis.moveToPoint(-8, 38, 700, {.maxSpeed = 70, .earlyExitRange = 0.1}, false);
+
+    // intake rings at line
+    chassis.turnToPoint(-7.6, 38, 800, {.minSpeed = 65, .earlyExitRange = 1}, false);
+    chassis.moveToPoint(-7.6, 38, 700, {.minSpeed = 48, .earlyExitRange = 0.1}, false);
 
     intake.move_velocity(450);
-    chassis.turnToPoint(-9, 65, 600, {.maxSpeed = 60}, false);
-    chassis.moveToPoint(-10, 65, 1500, {.maxSpeed = 60, .earlyExitRange = 0.1}, false);
-
+    chassis.turnToPoint(-8.2, 60, 600, {.minSpeed = 70}, false);
+    chassis.moveToPoint(-9.2, 60, 1500, {.maxSpeed = 80, .minSpeed = 40, .earlyExitRange = 0.1}, false);
+    pros::delay(1000);
     
-    // pros::delay(30);
+    //intake ring in middle of field
+    chassis.moveToPose(-23.5, 23.5, 45, 2000, {.forwards = false, .minSpeed = 50}, false);
+    chassis.turnToPoint(-23.5, 47, 600, {}, false);
+    intake.move_velocity(450);
+    chassis.moveToPoint(-23.5, 44, 1000, {}, false);
 
-    // // ring 1 and 2
-    // chassis.turnToPoint(-14, 32, 800, {.minSpeed = 50, .earlyExitRange = 1}, false);
-    // chassis.moveToPoint(-14, 32, 1000, {.minSpeed = 60, .earlyExitRange = 0.1}, false);
+    // corner bottom ring
+    chassis.turnToPoint(65, 65, 800, {}, false);
+    chassis.moveToPoint(-64, 64,1500, {.minSpeed = 40}, false);
+    pros::delay(30);
+    intake.move_velocity(400);
+    chassis.moveToPoint(55, 55, 1000, {.maxSpeed = 60}, false);
+    pros::delay(50);
 
-    // intake.move_velocity(450);
-    // chassis.follow(redneg2_txt, 6, 1500, false, false);
+    // grab middle stacked ring
+    chassis.turnToPoint(-46, 0, 800, {}, false);
+    intake.move_velocity(450);
+    chassis.moveToPoint(-46, 0, 800, {.minSpeed = 40}, false);
+
 }
 
 
@@ -134,25 +127,42 @@ ASSET(redpos2_txt);
 void red_pos() {
     //center goal rush
     chassis.setPose(-55, -60, 90);
-    chassis.follow(redpos1_txt, 12, 2000, true, true);
-
-    pros::delay(1050);
-
+    chassis.follow(redpos1_txt, 12, 1000, true, true);
+    //2.46 - 1.56 = 0.9
+    pros::delay(950);
+    left_motors.brake();
+    right_motors.brake();
     sweeper.toggle();
-    // pros::delay(50); 
 
+    // pull the mogo back
     chassis.moveToPoint(-35, -60, 1000, {.forwards = false, .maxSpeed = 80}, false);
     sweeper.toggle();
     pros::delay(30);
 
-    chassis.turnToPoint(-70, -70, 800, {.maxSpeed = 90}, true);
-    chassis.moveToPoint(-15, -58, 1000, {.forwards = false, .maxSpeed = 60}, false);
+    // grab goal
+    chassis.turnToPoint(-70, -60, 800, {}, true);
+    chassis.moveToPoint(-12, -55, 1000, {.forwards = false, .maxSpeed = 70}, false);
     pros::delay(80);
     clamp.toggle();
     pros::delay(40);
     
+    // intake preload ring
     intake.move_velocity(400);
-    pros::delay(100);
+    // pros::delay(100);
+
+    // // go to corner
+    // chassis.moveToPoint(-56, -56, 1200, {.minSpeed = 60}, false);
+    // chassis.turnToPoint(-70, -70, 800, {.minSpeed = 70}, false);
+    // chassis.moveToPoint(-70, -70, 1000, {.minSpeed = 80}, false);
+
+    // // intake the bottom ring
+    // intake.move_velocity(400);
+    // chassis.moveToPoint(-67, -67, 1000, {.forwards = false, .minSpeed = 30}, false);
+    
+    //intake_lift.toggle();
+    //chassis.moveToPoint(-70, -70, 800, {.minSpeed = 40}, false);
+
+    
 
     //grab other ring 
     chassis.turnToPoint(-24, -48, 800, {.maxSpeed = 90}, true);
@@ -160,7 +170,6 @@ void red_pos() {
     pros::delay(20);
     chassis.moveToPoint(-25.5, -41.5, 1000, {.forwards = true, .maxSpeed = 50}, false);
     intake.brake();
-    // chassis.moveToPoint(-24, -46, 900, {.forwards = false, .maxSpeed = 70}, false);
 
     // drop the goal
     chassis.moveToPoint(-50, -60, 1500, {.forwards = false, .maxSpeed = 70}, false);
@@ -175,45 +184,28 @@ void red_pos() {
     intake.move_velocity(400);
     pros::delay(700);
     intake.brake();
-    clamp.toggle();
+    // clamp.toggle();
 
     //hang
-    move_arm_to(300, 1500);
-    arm.brake();
-    chassis.turnToPoint(-9, -3, 800, {.forwards = false, .maxSpeed = 90}, false);
-    chassis.moveToPoint(-9, -3, 1200, {.forwards = false, .maxSpeed = 62}, false);
-    move_arm_to(0, 1500);
-    arm.brake(); 
+    // move_arm_to(300, 1500);
+    // arm.brake();
+    // chassis.turnToPoint(-9.5, -1.6, 800, {.forwards = false, .maxSpeed = 90}, false);
+    // chassis.moveToPoint(-9.5, -1.6, 1200, {.forwards = false, .maxSpeed = 62}, false);
+    // move_arm_to(0, 1500);
+    // arm.brake(); 
+
+    // touch ladder
+    chassis.turnToPoint(-22, -12, 800, {.forwards = true, .maxSpeed = 90}, false);
+    chassis.moveToPoint(-22, -12, 1200, {.forwards = true, .maxSpeed = 62}, false);
+    move_arm_to(170, 1500);
 
 }
  
-
-
-
-ASSET(blueelim1_txt);
-void test() {
-    chassis.follow(blueelim1_txt, 12, 2000, false, false);
-    intake.move_velocity(400);
-    pros::delay(1000);
-
-    chassis.moveToPoint(24, -36, 1500, {.forwards = false, .maxSpeed = 85, .minSpeed = 20}, false);
-    chassis.moveToPoint(10, -42.5, 1500, {.forwards = false, .maxSpeed = 50}, false);
-    clamp.toggle();
-
-
-
-    chassis.moveToPoint(24, -36, 1500, {.forwards = false, .maxSpeed = 65, .minSpeed = 20}, false);
-    chassis.moveToPoint(24, -48, 3000, {.forwards = false, .maxSpeed = 50}, false);
-    
-    
-    intake.brake();
-    //chassis.moveToPoint(11, -27, 3000, {.maxSpeed = 60}, false);
-}
 
 void red_elim() {
     
 }
 
 void blue_elim() {
-    blue_pos();
+    
 }
