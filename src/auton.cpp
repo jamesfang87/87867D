@@ -67,7 +67,7 @@ ASSET(bluepos1_txt);
 ASSET(bluepos2_txt);
 void blue_pos() {
     //center goal rush
-    chassis.setPose(55, -60, 90);
+    chassis.setPose(55, -60, 270);
     chassis.follow(bluepos1_txt, 12, 1000, true, true);
     pros::delay(950);
     left_motors.brake();
