@@ -10,29 +10,29 @@ void blue_neg() {
     // TODO: since the ring dragging on the high stake will waste time
     // alliance stake
     chassis.setPose(60, 10, 150);
-    move_arm_to(20, 1000);
-    pros::delay(150);
-    intake.move_velocity(400);
+    move_arm_to(18, 1000);
+    pros::delay(350);
+    intake.move_velocity(500);
     pros::delay(350);
     intake.brake();
     move_arm_to(200, 1500);
     pros::delay(600);
 
     //mogo
-    chassis.follow(blueneg1_txt, 8, 2500, false, false);
+    chassis.follow(blueneg1_txt, 8, 1800, false, false);
     pros::delay(15);
     clamp.toggle();
     move_arm_to(0, 1500);
 
     // intake rings at line
     intake.move_velocity(525);
-    chassis.turnToPoint(9, 36.6, 600, {.earlyExitRange = 1}, false);
-    chassis.moveToPoint(9, 36.6, 800, {.minSpeed = 30, .earlyExitRange = 0.1}, false);
+    chassis.turnToPoint(11.5, 36.6, 600, {.earlyExitRange = 1}, false);
+    chassis.moveToPoint(11.5, 36.6, 800, {.minSpeed = 30, .earlyExitRange = 0.1}, false);
     left_motors.brake();
     right_motors.brake();
 
-    chassis.turnToPoint(8.3, 59.35, 600, {.maxSpeed = 100}, false);
-    chassis.moveToPoint(8.3, 59.35, 800, {.maxSpeed = 80}, false);
+    chassis.turnToPoint(11, 59.35, 600, {.maxSpeed = 100}, false);
+    chassis.moveToPoint(11, 59.35, 800, {.maxSpeed = 80}, false);
     
     //intake ring in middle of field
     chassis.moveToPose(23.5, 23.5, 307, 2000, {.forwards = false, .minSpeed = 55}, false);
@@ -118,7 +118,6 @@ void blue_pos() {
 
 
 ASSET(redneg1_txt);
-ASSET(redneg2_txt);
 void red_neg() {
     // TODO: find a good place to put the preload ring
     // TODO: also might wanna increase the speed of some parts so it lags less
