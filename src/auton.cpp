@@ -35,7 +35,7 @@ void blue_neg() {
     chassis.moveToPoint(8.3, 59.35, 800, {.maxSpeed = 80}, false);
     
     //intake ring in middle of field
-    chassis.moveToPose(23.5, 23.5, 53, 2000, {.forwards = false, .minSpeed = 55}, false);
+    chassis.moveToPose(23.5, 23.5, 307, 2000, {.forwards = false, .minSpeed = 55}, false);
     chassis.turnToPoint(23.5, 47, 600, {}, false);
     intake.move_velocity(400);
     chassis.moveToPoint(23.5, 44, 800, {}, false);
