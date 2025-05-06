@@ -71,9 +71,9 @@ void blue_pos() {
 ASSET(redneg1_txt);
 ASSET(redneg2_txt);
 void red_neg() {
-    //alliance stake
+    // 239
+    // alliance stake
     chassis.setPose(-60, 10, 210);
-    // chassis.setPose(-60, 15, 215);
     move_arm_to(20, 1000);
     pros::delay(150);
     intake.move_velocity(400);
@@ -90,36 +90,39 @@ void red_neg() {
     clamp.toggle();
     move_arm_to(0, 1500);
 
-
     // intake rings at line
-    chassis.turnToPoint(-7.6, 38, 800, {.minSpeed = 65, .earlyExitRange = 1}, false);
-    chassis.moveToPoint(-7.6, 38, 700, {.minSpeed = 48, .earlyExitRange = 0.1}, false);
+    intake.move_velocity(525);
+    chassis.turnToPoint(-9, 36.6, 600, {.earlyExitRange = 1}, false);
+    chassis.moveToPoint(-9, 36.6, 800, {.minSpeed = 30, .earlyExitRange = 0.1}, false);
+    left_motors.brake();
+    right_motors.brake();
 
-    intake.move_velocity(450);
-    chassis.turnToPoint(-8.2, 60, 600, {.minSpeed = 70}, false);
-    chassis.moveToPoint(-8.2, 60, 1500, {.maxSpeed = 80, .minSpeed = 40, .earlyExitRange = 0.1}, false);
-    pros::delay(1000);
+    chassis.turnToPoint(-8.3, 59.35, 600, {.maxSpeed = 100}, false);
+    chassis.moveToPoint(-8.3, 59.35, 800, {.maxSpeed = 80}, false);
     
     //intake ring in middle of field
-    chassis.moveToPose(-23.5, 23.5, 45, 2000, {.forwards = false, .minSpeed = 50}, false);
+    chassis.moveToPose(-23.5, 23.5, 53, 2000, {.forwards = false, .minSpeed = 55}, false);
     chassis.turnToPoint(-23.5, 47, 600, {}, false);
-    intake.move_velocity(450);
-    chassis.moveToPoint(-23.5, 44, 1000, {}, false);
+    intake.move_velocity(400);
+    chassis.moveToPoint(-23.5, 44, 800, {}, false);
 
     // corner bottom ring
+    intake.brake();
     chassis.turnToPoint(-65, 65, 800, {}, false);
-    chassis.moveToPoint(-65, 65,1500, {.minSpeed = 40}, false);
-    pros::delay(30);
-    intake.move_velocity(400);
-    chassis.moveToPoint(-55, 55, 1000, {.forwards = false, .maxSpeed = 60}, false);
+    intake.move_velocity(450);
+    chassis.moveToPoint(-72, 72,1300, {.minSpeed = 20}, true);
+    pros::delay(800);
+    intake.brake();
+    pros::delay(500);
+    intake.move_velocity(500);
+    chassis.moveToPoint(-55, 55, 700, {.forwards = false, .maxSpeed = 40}, false);
     pros::delay(50);
 
     // grab middle stacked ring
-    intake_lift.toggle();
-    chassis.turnToPoint(-46, 0, 800, {}, false);
     intake.move_velocity(450);
-    chassis.moveToPoint(-46, 0, 800, {.minSpeed = 40}, false);
-
+    chassis.moveToPoint(-46, 3, 2000, {.maxSpeed = 67}, true);
+    pros::delay(1000);
+    intake_lift.toggle();
 }
 
 
