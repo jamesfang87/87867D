@@ -97,7 +97,7 @@ void red_neg() {
 
     intake.move_velocity(450);
     chassis.turnToPoint(-8.2, 60, 600, {.minSpeed = 70}, false);
-    chassis.moveToPoint(-9.2, 60, 1500, {.maxSpeed = 80, .minSpeed = 40, .earlyExitRange = 0.1}, false);
+    chassis.moveToPoint(-8.2, 60, 1500, {.maxSpeed = 80, .minSpeed = 40, .earlyExitRange = 0.1}, false);
     pros::delay(1000);
     
     //intake ring in middle of field
@@ -107,14 +107,15 @@ void red_neg() {
     chassis.moveToPoint(-23.5, 44, 1000, {}, false);
 
     // corner bottom ring
-    chassis.turnToPoint(65, 65, 800, {}, false);
-    chassis.moveToPoint(-64, 64,1500, {.minSpeed = 40}, false);
+    chassis.turnToPoint(-65, 65, 800, {}, false);
+    chassis.moveToPoint(-65, 65,1500, {.minSpeed = 40}, false);
     pros::delay(30);
     intake.move_velocity(400);
-    chassis.moveToPoint(55, 55, 1000, {.maxSpeed = 60}, false);
+    chassis.moveToPoint(-55, 55, 1000, {.forwards = false, .maxSpeed = 60}, false);
     pros::delay(50);
 
     // grab middle stacked ring
+    intake_lift.toggle();
     chassis.turnToPoint(-46, 0, 800, {}, false);
     intake.move_velocity(450);
     chassis.moveToPoint(-46, 0, 800, {.minSpeed = 40}, false);
