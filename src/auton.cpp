@@ -12,11 +12,12 @@ void blue_neg() {
     chassis.setPose(60, 10, 150);
     move_arm_to(18, 1000);
     pros::delay(350);
-    intake.move_velocity(500);
-    pros::delay(350);
+    intake.move_velocity(400);
+    pros::delay(400);
     intake.brake();
     move_arm_to(200, 1500);
-    pros::delay(600);
+    pros::delay(550);
+    intake.brake();
 
     //mogo
     chassis.follow(blueneg1_txt, 8, 1800, false, false);
@@ -123,14 +124,15 @@ void red_neg() {
     // TODO: also might wanna increase the speed of some parts so it lags less
     // TODO: since the ring dragging on the high stake will waste time
     // alliance stake
-    chassis.setPose(-60, 10, 210);
-    move_arm_to(20, 1000);
-    pros::delay(150);
-    intake.move_velocity(400);
+    chassis.setPose(60, 10, 150);
+    move_arm_to(18, 1000);
     pros::delay(350);
+    intake.move_velocity(400);
+    pros::delay(400);
     intake.brake();
     move_arm_to(200, 1500);
-    pros::delay(600);
+    pros::delay(550);
+    intake.brake();
 
     //mogo
     chassis.follow(redneg1_txt, 8, 2500, false, false);
