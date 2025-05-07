@@ -10,14 +10,9 @@ void blue_neg() {
     // TODO: since the ring dragging on the high stake will waste time
     // alliance stake
     chassis.setPose(60, 10, 150);
-    move_arm_to(18, 1000);
-    pros::delay(350);
-    intake.move_velocity(400);
-    pros::delay(400);
-    intake.brake();
+    arm_encoder.set_position(1800);
     move_arm_to(200, 1500);
     pros::delay(550);
-    intake.brake();
 
     //mogo
     chassis.follow(blueneg1_txt, 8, 1800, false, false);
@@ -26,30 +21,30 @@ void blue_neg() {
     move_arm_to(0, 1500);
 
     // intake rings at line
-    intake.move_velocity(525);
-    chassis.turnToPoint(11.5, 36.6, 600, {.earlyExitRange = 1}, false);
-    chassis.moveToPoint(11.5, 36.6, 800, {.minSpeed = 30, .earlyExitRange = 0.1}, false);
+    intake.move_velocity(540);
+    chassis.turnToPoint(9, 36.6, 600, {.earlyExitRange = 1}, false);
+    chassis.moveToPoint(9, 36.6, 800, {.minSpeed = 30, .earlyExitRange = 0.1}, false);
     left_motors.brake();
     right_motors.brake();
 
-    chassis.turnToPoint(11, 59.35, 600, {.maxSpeed = 100}, false);
-    chassis.moveToPoint(11, 59.35, 800, {.maxSpeed = 80}, false);
+    chassis.turnToPoint(8.3, 59.35, 600, {.maxSpeed = 100}, false);
+    chassis.moveToPoint(8.3, 59.35, 800, {.maxSpeed = 80}, false);
     
     //intake ring in middle of field
     chassis.moveToPose(23.5, 23.5, 307, 2000, {.forwards = false, .minSpeed = 55}, false);
     chassis.turnToPoint(23.5, 47, 600, {}, false);
-    intake.move_velocity(400);
+    intake.move_velocity(420);
     chassis.moveToPoint(23.5, 44, 800, {}, false);
 
     // corner bottom ring
     intake.brake();
     chassis.turnToPoint(65, 65, 800, {}, false);
-    intake.move_velocity(450);
+    intake.move_velocity(470);
     chassis.moveToPoint(72, 72,1300, {.minSpeed = 20}, true);
     pros::delay(800);
     intake.brake();
     pros::delay(500);
-    intake.move_velocity(500);
+    intake.move_velocity(520);
     chassis.moveToPoint(55, 55, 700, {.forwards = false, .maxSpeed = 40}, false);
     pros::delay(50);
 
@@ -125,14 +120,9 @@ void red_neg() {
     // TODO: since the ring dragging on the high stake will waste time
     // alliance stake
     chassis.setPose(60, 10, 150);
-    move_arm_to(18, 1000);
-    pros::delay(350);
-    intake.move_velocity(400);
-    pros::delay(400);
-    intake.brake();
+    arm_encoder.set_position(1800);
     move_arm_to(200, 1500);
     pros::delay(550);
-    intake.brake();
 
     //mogo
     chassis.follow(redneg1_txt, 8, 2500, false, false);
@@ -141,7 +131,7 @@ void red_neg() {
     move_arm_to(0, 1500);
 
     // intake rings at line
-    intake.move_velocity(525);
+    intake.move_velocity(540);
     chassis.turnToPoint(-9, 36.6, 600, {.earlyExitRange = 1}, false);
     chassis.moveToPoint(-9, 36.6, 800, {.minSpeed = 30, .earlyExitRange = 0.1}, false);
     left_motors.brake();
@@ -159,12 +149,12 @@ void red_neg() {
     // corner bottom ring
     intake.brake();
     chassis.turnToPoint(-65, 65, 800, {}, false);
-    intake.move_velocity(450);
+    intake.move_velocity(470);
     chassis.moveToPoint(-72, 72,1300, {.minSpeed = 20}, true);
     pros::delay(800);
     intake.brake();
     pros::delay(500);
-    intake.move_velocity(500);
+    intake.move_velocity(520);
     chassis.moveToPoint(-55, 55, 700, {.forwards = false, .maxSpeed = 40}, false);
     pros::delay(50);
 
